@@ -29,3 +29,5 @@
 
 /* Footer */
 @import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/footer__author/footer__author.css');
+
