@@ -23,8 +23,13 @@
 @import url('../blocks/profile/__button-edit/profile__button-edit.css');
 @import url('../blocks/profile/__status/profile__status.css');
 @import url('../blocks/profile/__button-add/profile__button-add.css');
-
-
+/* Places */
+@import url('../blocks/places/places.css');
+@import url('../blocks/places/places__cards/places__cards.css');
+@import url('../blocks/places/places__card/places__card.css');
+@import url('../blocks/places/__image/places__image.css');
+@import url('../blocks/places/__title/places__title.css');
+@import url('../blocks/places/__like/places__like.css');
 
 
 /* Footer */
