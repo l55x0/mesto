@@ -1,3 +1,9 @@
 .profile__text-block {
-  margin-right: 17px;
+  width: 100%;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__text-block {
+    margin-bottom: 36px;
+  }
+} 

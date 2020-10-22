@@ -4,3 +4,9 @@
   max-width: 120px;
   object-fit: cover;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__avatar {
+    margin: 0 0 14px 0;
+  }
+} 
