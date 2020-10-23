@@ -1,0 +1,9 @@
+.button {
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}

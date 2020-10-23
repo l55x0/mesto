@@ -1,7 +1,7 @@
 .places__cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 282px);
-  grid-template-rows: repeat(auto-fill, 361px);
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  grid-auto-rows: 361px; 
   justify-content: center;
   gap: 21px 18px;
   margin: 0 auto;
