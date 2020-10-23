@@ -1,0 +1,15 @@
+.button_type_submit {
+  border: 0;
+  padding: 0;
+  margin: 0 auto;
+  max-width: calc(100% - (36px * 2));
+  width: 100%;
+  border-radius: 2px;
+  background-color: #000;
+  color: #fff;
+  min-height: 51px;
+}
+
+.button_type_submit:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
