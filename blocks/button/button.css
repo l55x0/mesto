@@ -1,6 +1,5 @@
 .button {
-  background-repeat: no-repeat;
-  background-position: center;
+  background: transparent center no-repeat;
   cursor: pointer;
   outline-style: none;
 }
