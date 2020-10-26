@@ -6,8 +6,11 @@
   min-width: 20px;
   padding: 0;
   margin: 0;
+  transition: 0.3s;
+  margin-left: 5px;
 }
 
 .button_type_like:hover {
   background-image: url('../../../images/Like-active-button.svg');
+  transform: scale(1.3);
 }
