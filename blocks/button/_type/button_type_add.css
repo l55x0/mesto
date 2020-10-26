@@ -9,10 +9,6 @@
   min-height: 50px;
 }
 
-.button_type_add:hover {
-  background-image: url('../../../images/button-add-hover.svg');
-}
-
 @media screen and (max-width: 767px) {
   .button_type_add {
     width: 100%;

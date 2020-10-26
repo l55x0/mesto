@@ -14,17 +14,6 @@
 
 <body class="page">
   <div class="page__container">
-    <section class="popup popup_opened">
-      <form class="popup__container">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <fieldset class="popup__input-container">
-          <input class="popup__item" type="text" placeholder="Ваше имя">
-          <input class="popup__item" type="text" placeholder="Ваш статус">
-        </fieldset>
-        <input class="button button_type_submit" type="button" value="Сохранить">
-      </form>
-
-    </section>
     <header class="header page__header">
       <img src="./images/Logo.svg" alt="Логотип Маста России" class="header__logo">
     </header>
@@ -95,6 +84,18 @@
     <footer class="footer page__footer">
       <p class="footer__author">&copy; 2020 Mesto Russia Lod55</p>
     </footer>
+
+    <section class="popup popup_opened">
+      <form class="popup__container">
+        <button class="button popup__close" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <fieldset class="popup__input-container">
+          <input class="popup__input" type="text" placeholder="Ваше имя">
+          <input class="popup__input" type="text" placeholder="Ваш статус">
+        </fieldset>
+        <button class="button button_type_submit" type="submit">Сохранить</button>
+      </form>
+    </section>
 
   </div>
 </body>

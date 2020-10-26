@@ -8,8 +8,22 @@
   background-color: #000;
   color: #fff;
   min-height: 51px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
 }
 
 .button_type_submit:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  opacity: .8;
+}
+
+
+@media screen and (max-width: 373px) {
+  .button_type_submit {
+    font-size: 14px;
+    line-height: 17px;
+    max-width: calc(100% - (22px * 2));
+    width: 100%;
+  }
 }

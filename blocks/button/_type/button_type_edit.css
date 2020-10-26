@@ -9,11 +9,6 @@
   height: 24px;
   
 }
-
-.button_type_edit:hover {
-  background-image: url('../../../images/button-edit-hover.svg');
-}
-
 @media screen and (max-width: 373px) {
   .button_type_edit {
     max-width: 18px;

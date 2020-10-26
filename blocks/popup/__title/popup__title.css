@@ -7,3 +7,12 @@
   max-width: calc(100% - (36px * 2));
   width: 100%;
 }
+
+@media screen and (max-width: 373px) {
+  .popup__title {
+    font-size: 18px;
+    line-height: 22px;
+    max-width: calc(100% - (22px * 2));
+    width: 100%;
+  }
+}

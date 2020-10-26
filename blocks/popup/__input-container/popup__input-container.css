@@ -1,5 +1,16 @@
 .popup__input-container {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   max-width: calc(100% - (36px * 2));
   width: 100%;
+  border: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 373px) {
+  .popup__input-container {
+    max-width: calc(100% - (22px * 2));
+    width: 100%;
+  }
 }
