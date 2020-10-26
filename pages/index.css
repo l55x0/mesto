@@ -29,11 +29,11 @@
 @import url('../blocks/profile/__status/profile__status.css');
 /* Places */
 @import url('../blocks/places/places.css');
-@import url('../blocks/places/places__cards/places__cards.css');
-@import url('../blocks/places/places__card/places__card.css');
-@import url('../blocks/places/__image/places__image.css');
-@import url('../blocks/places/__row-block/places__row-block.css');
-@import url('../blocks/places/__title/places__title.css');
+/* Place */
+@import url('../blocks/place/place.css');
+@import url('../blocks/place/__image/place__image.css');
+@import url('../blocks/place/__row-block/place__row-block.css');
+@import url('../blocks/place/__title/place__title.css');
 /* Footer */
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/footer__author/footer__author.css');
