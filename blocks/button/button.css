@@ -2,6 +2,7 @@
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+  outline-style: none;
 }
 
 .button:hover {
