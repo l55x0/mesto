@@ -1,4 +1,4 @@
-.popup__close {
+.popup__button-close {
   width: 55px;
   height: 55px;
   background: transparent url(../../../images/Close-Icon.svg) center no-repeat;
@@ -13,14 +13,14 @@
 }
 
 @media screen and (max-width: 767px) {
-  .popup__close {
+  .popup__button-close {
     right: 0;
     top: -56px;
   }
 }
 
 @media screen and (max-width: 373px) {
-  .popup__close {
+  .popup__button-close {
     width: 35px;
     height: 35px;
     top: -50px;

@@ -1,5 +1,5 @@
 .popup__input {
-  font-family: Inter;
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   width: 100%;
   border: 0;
@@ -7,9 +7,9 @@
   color: #000;
   font-weight: 400;
   font-size: 14px;
-  line-height: 32px;
+  line-height: 32px; 
   border-bottom: 1px solid rgb(0, 0, 0, .2);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .popup__input:last-of-type {

@@ -24,54 +24,54 @@
         <img src="./images/jak-kysto.jpg" alt="Изображение Автора" class="profile__avatar">
         <div class="profile__text-block">
           <div class="profile__row-block">
-            <p class="profile__author">Жак-Ив Кусто</p>
-            <button class="button button_type_edit" type="button"></button>
+            <h1 class="profile__author">Жак-Ив Кусто</h1>
+            <button class="button profile__button-edit" type="button"></button>
           </div>
           <p class="profile__status">Исследователь океана</p>
         </div>
-        <button class="button button_type_add" type="button"></button>
+        <button class="button profile__button-add" type="button"></button>
       </section>
       <section class="places content__item">
         <article class="place">
           <img src="./images/moscow.jpeg" alt="Фотография местности Москва" class="place__image">
           <div class="place__row-block">
             <h2 class="place__title">Москва</h2>
-            <button class="button button_type_like" type="button"></button>
+            <button class="button place__button-like" type="button"></button>
           </div>
         </article>
         <article class="place">
           <img src="./images/Baikal.jpeg" alt="Фотография местности Байкал" class="place__image">
           <div class="place__row-block">
             <h2 class="place__title">Байкал</h2>
-            <button class="button button_type_like" type="button"></button>
+            <button class="button place__button-like" type="button"></button>
           </div>
         </article>
         <article class="place">
           <img src="./images/Chelyabinsk.jpeg" alt="Фотография местности Челябинская область" class="place__image">
           <div class="place__row-block">
             <h2 class="place__title">Челябинская область</h2>
-            <button class="button button_type_like" type="button"></button>
+            <button class="button place__button-like" type="button"></button>
           </div>
         </article>
         <article class="place">
           <img src="./images/Irkutsk.jpeg" alt="Фотография местности Иркутск" class="place__image">
           <div class="place__row-block">
             <h2 class="place__title">Иркутск</h2>
-            <button class="button button_type_like" type="button"></button>
+            <button class="button place__button-like" type="button"></button>
           </div>
         </article>
         <article class="place">
           <img src="./images/nurgush.jpeg" alt="Фотография местности Нургуш" class="place__image">
           <div class="place__row-block">
             <h2 class="place__title">Нургуш</h2>
-            <button class="button button_type_like" type="button"></button>
+            <button class="button place__button-like" type="button"></button>
           </div>
         </article>
         <article class="place">
           <img src="./images/Sochi.jpeg" alt="Фотография местности Сочи" class="place__image">
           <div class="place__row-block">
             <h2 class="place__title">Сочи</h2>
-            <button class="button button_type_like" type="button"></button>
+            <button class="button place__button-like" type="button"></button>
           </div>
         </article>
 
@@ -84,14 +84,15 @@
     </footer>
 
     <section class="popup">
-      <form class="popup__container">
-        <button class="button popup__close" type="button"></button>
+      <form class="popup__container" name="formPopup">
+        <button class="button popup__button-close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <fieldset class="popup__input-container">
-          <input class="popup__input popup__input_type_author" type="text" placeholder="Ваше имя">
-          <input class="popup__input popup__input_type_status" type="text" placeholder="Расскажите о себе">
+          <input class="popup__input popup__input_type_author" type="text" placeholder="Ваше имя" name="inputNamePopup">
+          <input class="popup__input popup__input_type_status" type="text" placeholder="Расскажите о себе"
+            name="inputStatusPopup">
         </fieldset>
-        <button class="button button_type_submit" type="submit">Сохранить</button>
+        <button class="button popup__button-submit" type="submit">Сохранить</button>
       </form>
     </section>
 
