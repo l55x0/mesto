@@ -1,7 +1,7 @@
-.popup__input-container {
+.popup__form {
   display: flex;
   flex-direction: column;
-  margin: 0 auto 48px;
+  margin: 0 auto 37px;
   max-width: calc(100% - (36px * 2));
   width: 100%;
   border: 0;
@@ -9,9 +9,9 @@
 }
 
 @media screen and (max-width: 373px) {
-  .popup__input-container {
+  .popup__form {
     max-width: calc(100% - (22px * 2));
     width: 100%;
-    margin-bottom: 45px;
+    margin-bottom: 25px;
   }
 }

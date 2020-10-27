@@ -1,8 +1,7 @@
 .popup__button-submit {
   border: 0;
   padding: 0;
-  margin: 0 auto 37px;
-  max-width: calc(100% - (36px * 2));
+  margin: 0 auto;
   width: 100%;
   border-radius: 2px;
   background-color: #000;
@@ -23,9 +22,6 @@
   .popup__button-submit {
     font-size: 14px;
     line-height: 17px;
-    max-width: calc(100% - (22px * 2));
-    width: 100%;
-    margin-bottom: 25px; 
     min-height: 46px;
   }
 }
