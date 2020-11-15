@@ -10,8 +10,6 @@
   transition: .3s;
 }
 
-.place__button-like:active {
-  background-image: url('../../../images/Like-active-button.svg');
-  transform: scale(1.3);
-  opacity: 1;
-} 
+.place__button-like:hover {
+transform: scale(1.3);
+}

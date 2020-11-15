@@ -73,14 +73,22 @@ function formSubmitHandler(event) {
 function addPlace(place) {
   const placesElement = document.querySelector(".places-template").content.cloneNode(true);
 
+  // Подставляем значения из массива в шаблон HTML
   placesElement.querySelector(".place__title").textContent = place.name;
   placesElement.querySelector(".place__image").src = place.link;
   placesElement.querySelector(".place__image").alt = 'Фотография местности ' + place.name;
+
+  // Отслеживаем событие клика кнопки Лайк
+  placesElement.querySelector(".place__button-like").addEventListener('click', function (evt) {
+    evt.target.classList.toggle("place__button-like_active");
+  });
 
   placesList.append(placesElement);
 }
 
 initialCards.forEach(addPlace);
+
+
 
 profileEditButton.addEventListener('click', showPopup); // Отслеживаем событие клика кнопки "редактировать" 
 popupCloseButton.addEventListener('click', closePopup); // Отслеживаем событие клика кнопки "закрыть" 
