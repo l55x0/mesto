@@ -1,3 +1,31 @@
+// массив 6 стандартных карточек 
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 // Выбираем элементы Popup
 const popup = document.querySelector('.popup');
 const popupContent = popup.querySelector('.popup__container'); // Выбираем контейнер popup
@@ -13,14 +41,17 @@ const profileEditButton = document.querySelector('.profile__button-edit'); // В
 const profileTitle = document.querySelector('.profile__author');
 const profileSubtitle = document.querySelector('.profile__status');
 
+// Выбираем блок Places
+const placesList = document.querySelector('.places');
+
+// Привязываем стартовое значение в Popap поля
+popupNameField.value = profileTitle.textContent;
+popupStatusField.value = profileSubtitle.textContent;
+
 // Функуция открытия Popup
 function showPopup() {
   popup.classList.add('popup_opened');
   popup.removeEventListener('click', showPopup);
-
-  // Привязываем стартовое значение в Popap поля
-  popupNameField.value = profileTitle.textContent;
-  popupStatusField.value = profileSubtitle.textContent;
 }
 
 // Функция закрытия Popup
@@ -38,6 +69,18 @@ function formSubmitHandler(event) {
 
   closePopup();
 }
+
+function addPlace(place) {
+  const placesElement = document.querySelector(".places-template").content.cloneNode(true);
+
+  placesElement.querySelector(".place__title").textContent = place.name;
+  placesElement.querySelector(".place__image").src = place.link;
+  placesElement.querySelector(".place__image").alt = 'Фотография местности ' + place.name;
+
+  placesList.append(placesElement);
+}
+
+initialCards.forEach(addPlace);
 
 profileEditButton.addEventListener('click', showPopup); // Отслеживаем событие клика кнопки "редактировать" 
 popupCloseButton.addEventListener('click', closePopup); // Отслеживаем событие клика кнопки "закрыть" 
