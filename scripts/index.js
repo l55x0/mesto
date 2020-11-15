@@ -78,8 +78,17 @@ function addPlace(place) {
   placesElement.querySelector(".place__image").src = place.link;
   placesElement.querySelector(".place__image").alt = 'Фотография местности ' + place.name;
 
+  // Отслеживаем событие клика кнопки Удаление
+  placesElement.querySelector(".place__button-remove").addEventListener("click", evt => {
+    const place = evt.target.closest(".place")
+
+    if (place) {
+      place.remove()
+    }
+  })
+
   // Отслеживаем событие клика кнопки Лайк
-  placesElement.querySelector(".place__button-like").addEventListener('click', function (evt) {
+  placesElement.querySelector(".place__button-like").addEventListener('click', evt => {
     evt.target.classList.toggle("place__button-like_active");
   });
 
