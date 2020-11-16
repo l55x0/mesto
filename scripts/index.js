@@ -28,13 +28,16 @@ const initialCards = [
 
 // Выбираем элементы Popup
 const popup = document.querySelector('.popup');
+const popupProfile = document.querySelector('#popup-profile');
 const popupContent = popup.querySelector('.popup__container'); // Выбираем контейнер popup
 const popupCloseButton = popupContent.querySelector('.popup__button-close'); // Выбираем элементы контейнера popup и кнопку закрытия
-const popupTitle = popupContent.querySelector('.popup__title');
 const popupForm = popupContent.querySelector('.popup__form'); // Выбираем форму и элементы формы
 const popupNameField = popupForm.querySelector('.popup__input_type_author');
 const popupStatusField = popupForm.querySelector('.popup__input_type_status');
 const popupSubmitButton = popupForm.querySelector('.popup__button-submit'); // Выбираем кнопу отправить 
+
+const profileAddButton = document.querySelector('.profile__button-add'); // Выбираем кнопу добавить карточку 
+const popupAddCard = document.querySelector('#popup-add-card');
 
 // Выбираем элементы блока Profile
 const profileEditButton = document.querySelector('.profile__button-edit'); // Выбираем кнопку редактирования
@@ -44,28 +47,33 @@ const profileSubtitle = document.querySelector('.profile__status');
 // Выбираем блок Places
 const placesList = document.querySelector('.places');
 
-// Привязываем стартовое значение в Popap поля
-popupNameField.value = profileTitle.textContent;
-popupStatusField.value = profileSubtitle.textContent;
 
 // Функуция открытия Popup
-function showPopup() {
+function showPopup(popup) {
   popup.classList.add('popup_opened');
-  popup.removeEventListener('click', showPopup);
+
+  if (popupProfile) {
+    popupNameField.value = profileTitle.textContent;
+    popupStatusField.value = profileSubtitle.textContent;
+  }
+
+  popup.removeEventListener('click', showPopup); // ???
 }
 
 // Функция закрытия Popup
 function closePopup() {
-  popup.classList.remove('popup_opened')
+  popup.classList.remove('popup_opened');
 }
 
 // Функция Обработчик «отправки» формы
 function formSubmitHandler(event) {
   event.preventDefault();
 
-  // Отправляем значения строк формы на страницу
-  profileTitle.textContent = popupNameField.value;
-  profileSubtitle.textContent = popupStatusField.value;
+  if (popupProfile) {
+    // Отправляем значения строк формы на страницу
+    profileTitle.textContent = popupNameField.value;
+    profileSubtitle.textContent = popupStatusField.value;
+  }
 
   closePopup();
 }
@@ -80,12 +88,12 @@ function addPlace(place) {
 
   // Отслеживаем событие клика кнопки Удаление
   placesElement.querySelector(".place__button-remove").addEventListener("click", evt => {
-    const place = evt.target.closest(".place")
+    const place = evt.target.closest(".place");
 
     if (place) {
-      place.remove()
+      place.remove();
     }
-  })
+  });
 
   // Отслеживаем событие клика кнопки Лайк
   placesElement.querySelector(".place__button-like").addEventListener('click', evt => {
@@ -95,10 +103,22 @@ function addPlace(place) {
   placesList.append(placesElement);
 }
 
-initialCards.forEach(addPlace);
+initialCards.forEach(addPlace); //Выводим данные из массива на страницу
 
 
 
-profileEditButton.addEventListener('click', showPopup); // Отслеживаем событие клика кнопки "редактировать" 
-popupCloseButton.addEventListener('click', closePopup); // Отслеживаем событие клика кнопки "закрыть" 
+profileEditButton.addEventListener('click', () => {
+  showPopup(popupProfile);
+}); // Отслеживаем событие клика кнопки "редактировать" 
+
+profileAddButton.addEventListener('click', () => {
+  showPopup(popupAddCard);
+}); // Отслеживаем событие клика кнопки "добавить карточку" 
+
+popupCloseButton.addEventListener('click', closePopup);
+// Отслеживаем событие клика кнопки "закрыть" 
+
+
 popupForm.addEventListener('submit', formSubmitHandler); // Отслеживаем событие клика кнопки "отправить"
+
+
