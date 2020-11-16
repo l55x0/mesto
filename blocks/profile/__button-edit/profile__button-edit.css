@@ -7,8 +7,8 @@
   background-image: url('../../../images/edit-buttom.svg');
   border: 1px solid #FFF;
   height: 24px;
-  
 }
+
 @media screen and (max-width: 373px) {
   .profile__button-edit {
     max-width: 18px;
