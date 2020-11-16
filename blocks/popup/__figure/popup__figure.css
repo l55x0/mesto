@@ -1,0 +1,12 @@
+.popup__figure {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__figure {
+    max-width: calc(100% - (40px * 2));
+  }
+}  
