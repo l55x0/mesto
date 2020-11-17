@@ -44,7 +44,7 @@
       <div class="popup__container">
         <button class="button popup__button-close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form">
+        <form class="popup__form" name="popup-form" id="popup-form-edit">
           <input class="popup__input popup__input_type_author" type="text" placeholder="Ваше имя"
             name="popup-input-name" maxlength="20">
           <input class="popup__input popup__input_type_status" type="text" placeholder="Расскажите о себе"
@@ -57,7 +57,7 @@
       <div class="popup__container">
         <button class="button popup__button-close" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popup-form">
+        <form class="popup__form" name="popup-form" id="popup-form-add">
           <input class="popup__input popup__input_type_place-name" type="text" placeholder="Название"
             name="popup-input-name" maxlength="20">
           <input class="popup__input popup__input_type_photo" type="text" placeholder="Ссылка на картинку"
@@ -66,11 +66,11 @@
         </form>
       </div>
     </section>
-    <section class="popup popup_opened popup_blackout" id="popup-image">
+    <section class="popup popup_blackout" id="popup-image">
       <figure class="popup__figure">
         <button class="button popup__button-close" type="button"></button>
-        <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg">
-        <figcaption class="popup__caption">Челябинская обл</figcaption>
+        <img class="popup__image">
+        <figcaption class="popup__caption"></figcaption>
       </figure>
     </section>
 
