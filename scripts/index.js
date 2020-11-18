@@ -63,6 +63,7 @@ function closePopup(popup) {
 
 //Функция создания карточки 
 function createCard(name, link) {
+  // Находим элемент в DOM и клонируем контент в теге
   const element = document.querySelector(".places-template").content.cloneNode(true);
 
   // находим элементы в DOM
@@ -70,7 +71,7 @@ function createCard(name, link) {
   const elementImage = element.querySelector(".place__image");
   const elementImageAlt = element.querySelector(".place__image");
 
-  // Подставляем значения из массива в шаблон HTML
+  // Подставляем пришедшие значения в шаблон новой карточки
   elementTitle.textContent = name;
   elementImage.src = link;
   elementImageAlt.alt = 'Фотография местности ' + name;
@@ -107,7 +108,7 @@ initialCards.forEach(item => {
   addCard(placesList, createCard(item.name, item.link));
 });
 
-// Перебор всей попапов с целью повешать обработчик на все кнопки закрытия
+// Перебор всех попапов с целью повешать обработчик на все кнопки закрытия
 popups.forEach(elem => {
   elem.querySelector('.popup__button-close').addEventListener('click', () => {
     closePopup(elem);
@@ -139,6 +140,7 @@ popupFormEdit.addEventListener("submit", evt => {
 
 // Отслеживаем событие клика кнопки "редактировать" 
 profileEditButton.addEventListener('click', () => {
+
   popupNameField.value = profileTitle.textContent;
   popupStatusField.value = profileSubtitle.textContent;
 
