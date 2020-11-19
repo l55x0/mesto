@@ -69,12 +69,11 @@ function createCard(name, link) {
   // находим элементы в DOM
   const elementTitle = element.querySelector(".place__title");
   const elementImage = element.querySelector(".place__image");
-  const elementImageAlt = element.querySelector(".place__image");
 
   // Подставляем пришедшие значения в шаблон новой карточки
   elementTitle.textContent = name;
   elementImage.src = link;
-  elementImageAlt.alt = 'Фотография местности ' + name;
+  elementImage.alt = 'Фотография местности ' + name;
 
   // Отслеживаем событие клика кнопки Удаление
   element.querySelector(".place__button-remove").addEventListener("click", evt => {
