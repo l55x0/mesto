@@ -47,7 +47,7 @@
         <form class="popup__form" name="popup-form" id="popup-form-edit">
           <input class="popup__input popup__input_type_author" type="text" placeholder="Ваше имя"
             name="popup-input-name" minlength="2" maxlength="40" required>
-          <span id="popup-input-profile-name-error" class="popup__error"></span>
+          <span id="popup-input-name-error" class="popup__error"></span>
           <input class="popup__input popup__input_type_status" type="text" placeholder="Расскажите о себе"
             name="popup-input-status" minlength="2" maxlength="200" required>
           <span id="popup-input-status-error" class="popup__error"></span>
@@ -62,7 +62,7 @@
         <form class="popup__form" name="popup-form" id="popup-form-add">
           <input class="popup__input popup__input_type_place-name" type="text" placeholder="Название"
             name="popup-input-place-name" minlength="2" maxlength="30" required>
-          <span id="popup-input-place-name-error" class="popup__error">Ошибка</span>
+          <span id="popup-input-place-name-error" class="popup__error"></span>
           <input class="popup__input popup__input_type_photo" type="url" placeholder="Ссылка на картинку"
             name="popup-input-url" required>
           <span id="popup-input-url-error" class="popup__error"></span>
@@ -91,6 +91,7 @@
     </article>
   </template>
 
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 
