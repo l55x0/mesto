@@ -1,8 +1,10 @@
 .profile__text-block {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 915px) {
   .profile__text-block {
     margin-bottom: 28px;
   }

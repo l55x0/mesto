@@ -1,7 +1,7 @@
 .popup__button-submit {
   border: 0;
   padding: 0;
-  margin: 0 auto;
+  margin: 13px auto 0;
   width: 100%;
   border-radius: 2px;
   background-color: #000;
@@ -23,6 +23,6 @@
     font-size: 14px;
     line-height: 17px;
     min-height: 46px;
+    margin-top: 10px;
   }
 }
-
