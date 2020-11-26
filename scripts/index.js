@@ -53,7 +53,7 @@ const placesList = document.querySelector('.places');
 // Функуция открытия Popup
 function showPopup(popup) {
   popup.classList.add('popup_opened');
-  popup.removeEventListener('click', showPopup); // зачем убираем слушатель???
+  popup.removeEventListener('click', showPopup);
 };
 
 // Функция закрытия Popup
@@ -107,10 +107,13 @@ initialCards.forEach(item => {
   addCard(placesList, createCard(item.name, item.link));
 });
 
-// Перебор всех попапов с целью повешать обработчик на все кнопки закрытия
+// Перебор всех попапов с целью повешать обработчик на все кнопки закрытия и фон
 popups.forEach(elem => {
-  elem.addEventListener('click', () => {
-    closePopup(elem);
+
+  elem.addEventListener('click', evt => {
+    if (evt.target.classList.contains('popup')) {
+      closePopup(elem);
+    }
   });
 
   elem.querySelector('.popup__button-close').addEventListener('click', () => {
@@ -161,3 +164,9 @@ profileAddButton.addEventListener('click', () => {
 //   };
 // }); Обработчик народитле (evt.target выявления дочернего элемента + проверка и доавление класса)
 // Сделать рефакторинг кода и изменить все обработчики лайка картинки закрытия попапа!!!
+
+// elem.addEventListener('keydown', evt => {
+//   if (evt.key === 'Escape') {
+//     closePopup(elem);
+//   }
+// });
