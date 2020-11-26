@@ -109,6 +109,10 @@ initialCards.forEach(item => {
 
 // Перебор всех попапов с целью повешать обработчик на все кнопки закрытия
 popups.forEach(elem => {
+  elem.addEventListener('click', () => {
+    closePopup(elem);
+  });
+
   elem.querySelector('.popup__button-close').addEventListener('click', () => {
     closePopup(elem);
   });
@@ -150,7 +154,6 @@ profileEditButton.addEventListener('click', () => {
 profileAddButton.addEventListener('click', () => {
   showPopup(popupAddCard);
 });
-
 
 // songsContainer.addEventListener('click',evt =>{
 //   if (evt.target.classList.contains('song__like')){
