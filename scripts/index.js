@@ -107,10 +107,16 @@ initialCards.forEach(item => {
   addCard(placesList, createCard(item.name, item.link));
 });
 
-// Перебор всех попапов с целью повешать обработчик на все кнопки закрытия и фон
+// Перебор всех попапов 
 popups.forEach(elem => {
 
-  elem.addEventListener('click', evt => {
+  document.addEventListener('keydown', evt => {
+    if (evt.key === 'Escape') {
+      closePopup(elem);
+    }
+  });
+
+  elem.addEventListener('mousedown', evt => {
     if (evt.target.classList.contains('popup')) {
       closePopup(elem);
     }
@@ -119,11 +125,11 @@ popups.forEach(elem => {
   elem.querySelector('.popup__button-close').addEventListener('click', () => {
     closePopup(elem);
   });
+
 });
 
 // Отслеживаем событие отправки формы "Новой карточки"
-popupFormAdd.addEventListener("submit", evt => {
-  evt.preventDefault()
+popupFormAdd.addEventListener("submit", () => {
 
   const newNameCard = popupFormAdd.querySelector('.popup__input_type_place-name').value; // Значения полей формы 
   const newLinkCard = popupFormAdd.querySelector('.popup__input_type_photo').value;
@@ -132,16 +138,16 @@ popupFormAdd.addEventListener("submit", evt => {
 
   closePopup(popupAddCard); // закрываем форму
   popupFormAdd.reset(); // сбрасываем значения формы
+
 });
 
 // Отслеживаем событие отправки формы "Редактирования Profile" и отправляем полученые значения 
-popupFormEdit.addEventListener("submit", evt => {
-  evt.preventDefault()
-
+popupFormEdit.addEventListener("submit", () => {
   profileTitle.textContent = popupNameField.value;
   profileSubtitle.textContent = popupStatusField.value;
 
   closePopup(popupProfile);
+  popupFormEdit.reset();
 });
 
 // Отслеживаем событие клика кнопки "редактировать" 
@@ -157,16 +163,3 @@ profileEditButton.addEventListener('click', () => {
 profileAddButton.addEventListener('click', () => {
   showPopup(popupAddCard);
 });
-
-// songsContainer.addEventListener('click',evt =>{
-//   if (evt.target.classList.contains('song__like')){
-//     evt.target.classList.toggle('song__like_active'); 
-//   };
-// }); Обработчик народитле (evt.target выявления дочернего элемента + проверка и доавление класса)
-// Сделать рефакторинг кода и изменить все обработчики лайка картинки закрытия попапа!!!
-
-// elem.addEventListener('keydown', evt => {
-//   if (evt.key === 'Escape') {
-//     closePopup(elem);
-//   }
-// });

@@ -48,7 +48,7 @@ function setEventListeners(form, config) {
   });
 }
 
-// Функция ключения проверки валидности формы
+// Функция включения проверки валидности формы
 function enableValidation(config) {
   const forms = document.querySelectorAll(config.formSelector); // ищем в DOM все формы
   // Обходим все формы и вещаем слушатель события
