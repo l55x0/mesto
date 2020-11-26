@@ -22,6 +22,12 @@ function checkInputValidity(form, input, config) {
   }
 }
 
+// Функция дизейбла кнопки
+function disabledButton(button, config) {
+  button.classList.add(config.buttonInvalidClass);
+  button.disabled = true;
+}
+
 // Фунция проверки состояния кнопки форм
 function setButtonState(button, isActive, config) {
   // Если кнопка активна убираем класс и состояние, и наоборот
@@ -29,8 +35,7 @@ function setButtonState(button, isActive, config) {
     button.classList.remove(config.buttonInvalidClass);
     button.disabled = false;
   } else {
-    button.classList.add(config.buttonInvalidClass);
-    button.disabled = true;
+    disabledButton(button, config);
   }
 }
 
@@ -58,6 +63,7 @@ function enableValidation(config) {
     // Вешаем слушатель на сабытие отправки формы
     form.addEventListener('submit', (evt) => {
       evt.preventDefault(); // убираем дефолтное поведение кнопки отправить форму
+      disabledButton(submitButton, config);
     });
 
     const submitButton = form.querySelector(config.submitButtonSelector); // выбираем в DOM кнопку формы
