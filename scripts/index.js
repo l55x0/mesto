@@ -32,6 +32,7 @@ const popupProfile = document.querySelector('#popup-profile');
 const popupAddCard = document.querySelector('#popup-add-card');
 const popupImage = document.querySelector('#popup-image');
 
+
 // Выбираем формы по id 
 const popupFormAdd = document.querySelector('#popup-form-add');
 const popupFormEdit = document.querySelector('#popup-form-edit');
@@ -50,13 +51,17 @@ const profileAddButton = document.querySelector('.profile__button-add');
 // Выбираем блок Places
 const placesList = document.querySelector('.places');
 
+// Функция нажатия на ESC
+function pressingEscape(evt) {
+  const popupIsOpen = document.querySelector('.popup_opened')
+  if (evt.key === 'Escape') {
+    closePopup(popupIsOpen);
+  }
+}
+
 // Функуция открытия Popup
 function showPopup(popup) {
-  document.addEventListener('keydown', evt => {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  });
+  document.addEventListener('keydown', pressingEscape);
 
   popup.classList.add('popup_opened');
   popup.removeEventListener('click', showPopup);
@@ -65,7 +70,8 @@ function showPopup(popup) {
 // Функция закрытия Popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopup);
+
+  document.removeEventListener('keydown', pressingEscape);
 };
 
 //Функция создания карточки 
@@ -76,15 +82,13 @@ function createCard(name, link) {
   // находим элементы в DOM
   const elementTitle = element.querySelector(".place__title");
   const elementImage = element.querySelector(".place__image");
+  const placeButtonRemove = element.querySelector(".place__button-remove");
+  const placeButtonLike = element.querySelector(".place__button-like");
 
   // Подставляем пришедшие значения в шаблон новой карточки
   elementTitle.textContent = name;
   elementImage.src = link;
   elementImage.alt = 'Фотография местности ' + name;
-
-  const placeButtonRemove = element.querySelector(".place__button-remove");
-  const placeButtonLike = element.querySelector(".place__button-like");
-  const placeImage = element.querySelector(".place__image");
 
   // Отслеживаем событие клика кнопки Удаление
   placeButtonRemove.addEventListener("click", evt => {
@@ -97,9 +101,12 @@ function createCard(name, link) {
   });
 
   // Отслеживаем событие клика на картинку
-  placeImage.addEventListener('click', evt => {
-    document.querySelector('.popup__image').src = evt.target.src;
-    document.querySelector('.popup__caption').textContent = name;
+  elementImage.addEventListener('click', evt => {
+    const popupElemImg = popupImage.querySelector('.popup__image');
+    const popupElemCaptain = popupImage.querySelector('.popup__caption');
+
+    popupElemImg.src = evt.target.src;
+    popupElemCaptain.textContent = name;
 
     showPopup(popupImage);
   });
