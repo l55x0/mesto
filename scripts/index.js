@@ -1,3 +1,7 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
+
 // массив 6 стандартных карточек 
 const initialCards = [
   {
@@ -30,25 +34,18 @@ const initialCards = [
 const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('#popup-profile');
 const popupAddCard = document.querySelector('#popup-add-card');
-const popupImage = document.querySelector('#popup-image');
-
-
 // Выбираем формы по id 
 const popupFormAdd = document.querySelector('#popup-form-add');
 const popupFormEdit = document.querySelector('#popup-form-edit');
 // Выбираем елементы форм
 const popupNameField = document.querySelector('.popup__input_type_author');
 const popupStatusField = document.querySelector('.popup__input_type_status');
-const popupNamePlaceField = document.querySelector('.popup__input_type_place-name');
-const popupPlacePhoto = document.querySelector('.popup__input_type_photo');
-
 // Выбираем элементы блока Profile
 const profileTitle = document.querySelector('.profile__author');
 const profileSubtitle = document.querySelector('.profile__status');
 const profileEditButton = document.querySelector('.profile__button-edit');
 const profileAddButton = document.querySelector('.profile__button-add');
-
-// Выбираем блок Places
+// Выбираем контейнер для карточек
 const placesList = document.querySelector('.places');
 
 // Функция нажатия на ESC
@@ -60,7 +57,7 @@ function pressingEscape(evt) {
 }
 
 // Функуция открытия Popup
-function showPopup(popup) {
+export function showPopup(popup) {
   document.addEventListener('keydown', pressingEscape);
 
   popup.classList.add('popup_opened');
@@ -68,65 +65,25 @@ function showPopup(popup) {
 };
 
 // Функция закрытия Popup
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
   document.removeEventListener('keydown', pressingEscape);
 };
 
-//Функция создания карточки 
-function createCard(name, link) {
-  // Находим элемент в DOM и клонируем контент в теге
-  const element = document.querySelector(".places-template").content.cloneNode(true);
-
-  // находим элементы в DOM
-  const elementTitle = element.querySelector(".place__title");
-  const elementImage = element.querySelector(".place__image");
-  const placeButtonRemove = element.querySelector(".place__button-remove");
-  const placeButtonLike = element.querySelector(".place__button-like");
-
-  // Подставляем пришедшие значения в шаблон новой карточки
-  elementTitle.textContent = name;
-  elementImage.src = link;
-  elementImage.alt = 'Фотография местности ' + name;
-
-  // Отслеживаем событие клика кнопки Удаление
-  placeButtonRemove.addEventListener("click", evt => {
-    evt.target.closest(".place").remove();
-  });
-
-  // Отслеживаем событие клика кнопки Лайк
-  placeButtonLike.addEventListener('click', evt => {
-    evt.target.classList.toggle("place__button-like_active");
-  });
-
-  // Отслеживаем событие клика на картинку
-  elementImage.addEventListener('click', evt => {
-    const popupElemImg = popupImage.querySelector('.popup__image');
-    const popupElemCaptain = popupImage.querySelector('.popup__caption');
-
-    popupElemImg.src = evt.target.src;
-    popupElemCaptain.textContent = name;
-
-    showPopup(popupImage);
-  });
-
-  return element; //возвращается созданная карточка 
-}
-
-// Функция добавления карточки в контейнер
-function addCard(container, cardElement) {
-  container.prepend(cardElement);
-}
-
-// Перебор элементов массива с функцией addCard
+// Перебор массива с данными и отправка в функцию AddCard в публичной функции Card
 initialCards.forEach(item => {
-  addCard(placesList, createCard(item.name, item.link));
+  const card = new Card(item, '.places-template'); // создаем экземпляр Card
+  const cardElement = card.generateCard(); // запускаем публичную функцию в экземпляре
+
+  card.addCard(placesList, cardElement);
 });
+
 
 // Перебор всех попапов 
 popups.forEach(popup => {
   popup.addEventListener('mousedown', (evt) => {
+    //Проверяем наличие класс при отжатии мышки для дальнейшего закрытия по фону попапов
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
       closePopup(popup);
     }
@@ -135,12 +92,15 @@ popups.forEach(popup => {
 
 // Отслеживаем событие отправки формы "Новой карточки"
 popupFormAdd.addEventListener("submit", evt => {
-  evt.preventDefault()
+  evt.preventDefault() // сброс дефолтной отправки формы
+  const newCard = []; // создаем массив для класса Card
+  newCard.name = popupFormAdd.querySelector('.popup__input_type_place-name').value; // Значения полей формы 
+  newCard.link = popupFormAdd.querySelector('.popup__input_type_photo').value;
 
-  const newNameCard = popupFormAdd.querySelector('.popup__input_type_place-name').value; // Значения полей формы 
-  const newLinkCard = popupFormAdd.querySelector('.popup__input_type_photo').value;
+  const card = new Card(newCard, '.places-template'); // создаем экземпляр Card
+  const cardElement = card.generateCard(); // запускаем публичную функцию в экземпляре
 
-  addCard(placesList, createCard(newNameCard, newLinkCard)); // Добавляем новую карточку
+  card.addCard(placesList, cardElement); // Добавляем новую карточку через публичную функцию Card
 
   closePopup(popupAddCard); // закрываем форму
   popupFormAdd.reset(); // сбрасываем значения формы
@@ -151,7 +111,7 @@ popupFormAdd.addEventListener("submit", evt => {
 popupFormEdit.addEventListener("submit", evt => {
   evt.preventDefault();
 
-  profileTitle.textContent = popupNameField.value;
+  profileTitle.textContent = popupNameField.value; // Значения полей формы 
   profileSubtitle.textContent = popupStatusField.value;
 
   closePopup(popupProfile);
@@ -161,7 +121,7 @@ popupFormEdit.addEventListener("submit", evt => {
 // Отслеживаем событие клика кнопки "редактировать" 
 profileEditButton.addEventListener('click', () => {
 
-  popupNameField.value = profileTitle.textContent;
+  popupNameField.value = profileTitle.textContent; // Значения полей формы 
   popupStatusField.value = profileSubtitle.textContent;
 
   showPopup(popupProfile);
