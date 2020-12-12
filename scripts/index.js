@@ -34,6 +34,9 @@ const initialCards = [
 const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('#popup-profile');
 const popupAddCard = document.querySelector('#popup-add-card');
+const popupElemImg = document.querySelector('.popup__image');
+const popupElemCaptain = document.querySelector('.popup__caption');
+const popupImage = document.querySelector('#popup-image');
 // Выбираем формы по id 
 const popupFormAdd = document.querySelector('#popup-form-add');
 const popupFormEdit = document.querySelector('#popup-form-edit');
@@ -48,37 +51,62 @@ const profileAddButton = document.querySelector('.profile__button-add');
 // Выбираем контейнер для карточек
 const placesList = document.querySelector('.places');
 
+// конфиг селекторов Popup
+const validationConfigPopup = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inputInvalidClass: 'popup__input_state_invalid',
+  buttonInvalidClass: 'popup__button-submit_invalid',
+};
+
 // Функция нажатия на ESC
 function pressingEscape(evt) {
-  const popupIsOpen = document.querySelector('.popup_opened')
   if (evt.key === 'Escape') {
-    closePopup(popupIsOpen);
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup);
   }
-}
+};
+
+// Функция клика на фото (открытие попапа)
+export function handleImageClick(name, link) {
+  popupElemImg.src = link;
+  popupElemCaptain.textContent = name;
+
+  showPopup(popupImage);
+};
 
 // Функуция открытия Popup
-export function showPopup(popup) {
+function showPopup(popup) {
   document.addEventListener('keydown', pressingEscape);
 
   popup.classList.add('popup_opened');
-  popup.removeEventListener('click', showPopup);
 };
 
 // Функция закрытия Popup
-export function closePopup(popup) {
+function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
   document.removeEventListener('keydown', pressingEscape);
 };
 
-// Перебор массива с данными и отправка в функцию AddCard в публичной функции Card
-initialCards.forEach(item => {
-  const card = new Card(item, '.places-template'); // создаем экземпляр Card
+// Функция создает и возвращает карточку
+function createCard(data) {
+  const card = new Card(data, '.places-template'); // создаем экземпляр Card
   const cardElement = card.generateCard(); // запускаем публичную функцию в экземпляре
 
-  card.addCard(placesList, cardElement);
-});
+  return cardElement
+};
 
+// функция добавляет карточку на страницу
+function addCard(container, cardElement) {
+  container.prepend(cardElement);
+};
+
+// Перебор массива с данными и отправка в функцию AddCard в публичной функции Card
+initialCards.forEach(item => {
+  addCard(placesList, createCard(item));
+});
 
 // Перебор всех попапов 
 popups.forEach(popup => {
@@ -93,18 +121,14 @@ popups.forEach(popup => {
 // Отслеживаем событие отправки формы "Новой карточки"
 popupFormAdd.addEventListener("submit", evt => {
   evt.preventDefault() // сброс дефолтной отправки формы
-  const newCard = []; // создаем массив для класса Card
-  newCard.name = popupFormAdd.querySelector('.popup__input_type_place-name').value; // Значения полей формы 
-  newCard.link = popupFormAdd.querySelector('.popup__input_type_photo').value;
+  const newCard = {}; // создаем объект для отправи в класс Card
+  newCard.name = popupFormAdd['popup-input-place-name'].value; // Значения полей формы 
+  newCard.link = popupFormAdd['popup-input-url'].value;
 
-  const card = new Card(newCard, '.places-template'); // создаем экземпляр Card
-  const cardElement = card.generateCard(); // запускаем публичную функцию в экземпляре
-
-  card.addCard(placesList, cardElement); // Добавляем новую карточку через публичную функцию Card
+  addCard(placesList, createCard(newCard)); // Добавляем новую карточку заполненую в форме юзером
 
   closePopup(popupAddCard); // закрываем форму
   popupFormAdd.reset(); // сбрасываем значения формы
-
 });
 
 // Отслеживаем событие отправки формы "Редактирования Profile" и отправляем полученые значения 
@@ -131,3 +155,11 @@ profileEditButton.addEventListener('click', () => {
 profileAddButton.addEventListener('click', () => {
   showPopup(popupAddCard);
 });
+
+// Создаем валидацию для формы редактирования профиля
+const editPupupValidator = new FormValidator(validationConfigPopup, popupFormEdit);
+editPupupValidator.enableValidation();
+
+// Создаем валидацию для формы добавления новой картоки
+const addPupupValidator = new FormValidator(validationConfigPopup, popupFormAdd);
+addPupupValidator.enableValidation();
