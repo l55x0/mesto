@@ -142,7 +142,7 @@ popupFormEdit.addEventListener("submit", evt => {
   popupFormEdit.reset();
 });
 
-// Отслеживаем событие клика кнопки "редактировать" 
+// Отслеживаем событие клика кнопки "редактировать" 
 profileEditButton.addEventListener('click', () => {
 
   popupNameField.value = profileTitle.textContent; // Значения полей формы 
@@ -151,7 +151,7 @@ profileEditButton.addEventListener('click', () => {
   showPopup(popupProfile);
 });
 
-// Отслеживаем событие клика кнопки "добавить карточку" 
+// Отслеживаем событие клика кнопки "добавить карточку" 
 profileAddButton.addEventListener('click', () => {
   showPopup(popupAddCard);
 });
