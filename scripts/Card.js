@@ -30,11 +30,8 @@ export default class Card {
 
   // функция вешает слушатели событий
   _setEventListeners = () => {
-    const placeButtonRemove = this._element.querySelector(".place__button-remove");
-    const placeButtonLike = this._element.querySelector(".place__button-like");
-
-    placeButtonRemove.addEventListener('click', this._deleteClickHandler);
-    placeButtonLike.addEventListener('click', this._likeClickHandler);
+    this._placeButtonRemove.addEventListener('click', this._deleteClickHandler);
+    this._placeButtonLike.addEventListener('click', this._likeClickHandler);
     this._elementImage.addEventListener('click', () => {
       handleImageClick(this._name, this._link)
     });
@@ -46,6 +43,7 @@ export default class Card {
     this._elementImage = this._element.querySelector(".place__image");
     this._elementTitle = this._element.querySelector(".place__title");
     this._placeButtonLike = this._element.querySelector(".place__button-like");
+    this._placeButtonRemove = this._element.querySelector(".place__button-remove");
     this._setEventListeners();
 
 
