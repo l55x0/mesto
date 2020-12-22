@@ -1,5 +1,9 @@
+import Section from './Section.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+
 
 
 // массив 6 стандартных карточек 
@@ -60,63 +64,32 @@ const validationConfigPopup = {
   buttonInvalidClass: 'popup__button-submit_invalid',
 };
 
-// Функция нажатия на ESC
-function pressingEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened')
-    closePopup(openedPopup);
-  }
-};
+const popupIsOpen = new Popup('#popup-profile');
 
-// Функция клика на фото (открытие попапа)
-export function handleImageClick(name, link) {
-  popupElemImg.src = link;
-  popupElemCaptain.textContent = name;
+// Отрисовка Карточек
+const cardsList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card = new Card({
+      data: item,
+      handleCardClick: (name, link) => {
+        const popupImage = new PopupWithImage({
+          name: name,
+          link: link
+        }, '#popup-image');
+        popupImage.open();
+        popupImage.setEventListeners();
+      }
+    }, '.places-template');
+    const cardElement = card.generateCard();
+    cardsList.setItem(cardElement);
+  },
+},
+  '.places'
+);
 
-  showPopup(popupImage);
-};
-
-// Функуция открытия Popup
-function showPopup(popup) {
-  document.addEventListener('keydown', pressingEscape);
-
-  popup.classList.add('popup_opened');
-};
-
-// Функция закрытия Popup
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-
-  document.removeEventListener('keydown', pressingEscape);
-};
-
-// Функция создает и возвращает карточку
-function createCard(data) {
-  const card = new Card(data, '.places-template'); // создаем экземпляр Card
-  const cardElement = card.generateCard(); // запускаем публичную функцию в экземпляре
-
-  return cardElement
-};
-
-// функция добавляет карточку на страницу
-function addCard(container, cardElement) {
-  container.prepend(cardElement);
-};
-
-// Перебор массива с данными и отправка в функцию AddCard в публичной функции Card
-initialCards.forEach(item => {
-  addCard(placesList, createCard(item));
-});
-
-// Перебор всех попапов 
-popups.forEach(popup => {
-  popup.addEventListener('mousedown', (evt) => {
-    //Проверяем наличие класс при отжатии мышки для дальнейшего закрытия по фону попапов
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
-      closePopup(popup);
-    }
-  });
-});
+// Запуск перебора всех карточек
+cardsList.renderItems();
 
 // Отслеживаем событие отправки формы "Новой карточки"
 popupFormAdd.addEventListener("submit", evt => {
@@ -148,7 +121,9 @@ profileEditButton.addEventListener('click', () => {
   popupNameField.value = profileTitle.textContent; // Значения полей формы 
   popupStatusField.value = profileSubtitle.textContent;
 
-  showPopup(popupProfile);
+  popupIsOpen.open();
+  popupIsOpen.setEventListeners();
+  // showPopup(popupProfile);
 });
 
 // Отслеживаем событие клика кнопки "добавить карточку" 
@@ -163,3 +138,64 @@ editPupupValidator.enableValidation();
 // Создаем валидацию для формы добавления новой картоки
 const addPupupValidator = new FormValidator(validationConfigPopup, popupFormAdd);
 addPupupValidator.enableValidation();
+
+
+// // Функция нажатия на ESC
+// function pressingEscape(evt) {
+//   if (evt.key === 'Escape') {
+//     const openedPopup = document.querySelector('.popup_opened')
+//     closePopup(openedPopup);
+//   }
+// };
+
+
+// // Функуция открытия Popup
+// function showPopup(popup) {
+//   document.addEventListener('keydown', pressingEscape);
+
+//   popup.classList.add('popup_opened');
+// };
+
+// // Функция закрытия Popup
+// function closePopup(popup) {
+//   popup.classList.remove('popup_opened');
+
+//   document.removeEventListener('keydown', pressingEscape);
+// };
+
+// // Функция создает и возвращает карточку
+// function createCard(data) {
+//   const card = new Card(data, '.places-template'); // создаем экземпляр Card
+//   const cardElement = card.generateCard(); // запускаем публичную функцию в экземпляре
+
+//   return cardElement
+// };
+
+
+// // функция добавляет карточку на страницу
+// function addCard(container, cardElement) {
+//   container.prepend(cardElement);
+// };
+
+// // Перебор массива с данными и отправка в функцию AddCard в публичной функции Card
+// initialCards.forEach(item => {
+//   addCard(placesList, createCard(item));
+// });
+
+// // Перебор всех попапов 
+// popups.forEach(popup => {
+//   popup.addEventListener('mousedown', (evt) => {
+//     //Проверяем наличие класс при отжатии мышки для дальнейшего закрытия по фону попапов
+//     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
+//       closePopup(popup);
+//     }
+//   });
+// });
+
+// // Функция клика на фото (открытие попапа)
+// export function handleImageClick(name, link) {
+//   popupElemImg.src = link;
+//   popupElemCaptain.textContent = name;
+
+//   showPopup(popupImage);
+// };

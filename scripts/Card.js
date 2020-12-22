@@ -1,13 +1,12 @@
-import { handleImageClick } from './index.js';
-
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._link = data.link;
     this._name = data.name;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   };
 
-  // Фунция возвращает шаблон карточки из DOM
+  // Метод возвращает шаблон карточки из DOM
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -18,26 +17,26 @@ export default class Card {
     return cardElement;
   };
 
-  // функция удаляет карточку из DOM
+  // Метод удаляет карточку из DOM
   _deleteClickHandler = () => {
     this._element.remove();
   };
 
-  // функция добавляет-удаляет класс на кнопке лайк
+  // Метод добавляет-удаляет класс на кнопке лайк
   _likeClickHandler = () => {
     this._placeButtonLike.classList.toggle("place__button-like_active");
   };
 
-  // функция вешает слушатели событий
+  // Метод вешает слушатели событий
   _setEventListeners = () => {
     this._placeButtonRemove.addEventListener('click', this._deleteClickHandler);
     this._placeButtonLike.addEventListener('click', this._likeClickHandler);
     this._elementImage.addEventListener('click', () => {
-      handleImageClick(this._name, this._link)
+      this._handleCardClick(this._name, this._link)
     });
   };
 
-  // функция генерирует и возвращает карточку 
+  // Метод генерирует и возвращает карточку 
   generateCard = () => {
     this._element = this._getTemplate();
     this._elementImage = this._element.querySelector(".place__image");
