@@ -1,6 +1,6 @@
 export default class Popup {
-  constructor(containerSelector) {
-    this._container = document.querySelector(containerSelector);
+  constructor(container) {
+    this._container = container;
   }
 
   // Метод открытия попапа
@@ -17,22 +17,20 @@ export default class Popup {
   _handleEscClose = evt => {
     if (evt.key === 'Escape') {
       this.close(this._container);
-      document.removeEventListener('keydown', () => { });
+    }
+  }
+
+  // Метод клика по зонам контейнера
+  _handleClickContainer = (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
+      this.close(this._container);
     }
   }
 
   // Метод добавляющий слушатели событий
   setEventListeners() {
     document.addEventListener('keydown', this._handleEscClose);
-
-    this._container.addEventListener('click', () => {
-      this.open(this._container);
-    });
-
-    this._container.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
-        this.close(this._container);
-      }
-    });
+    this._container.addEventListener('click', this.open(this._container));
+    this._container.addEventListener('click', this._handleClickContainer);
   }
 }
