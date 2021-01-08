@@ -1,9 +1,9 @@
-import Section from './Section.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 import {
   initialCards,
   validationConfigPopup,
@@ -19,7 +19,7 @@ import {
   profileSubtitleContainer,
   popupNameField,
   popupStatusField
-} from './constants.js';
+} from '../utils/constants.js';
 
 
 // Константа содержащая в себе все карточки
@@ -74,6 +74,7 @@ const userInfo = new UserInfo({
   subTitleContainer: profileSubtitleContainer
 });
 
+// Экземпляр класса с формой для информации о юзере
 const formProfile = new PopupWithForm({
   submitForm: (formData) => {
     userInfo.setUserInfo(formData);
@@ -94,7 +95,6 @@ addPupupValidator.enableValidation();
 
 // Отслеживаем событие клика кнопки "редактировать" 
 profileEditButton.addEventListener('click', () => {
-
   popupNameField.value = userInfo.getUserInfo().title;
   popupStatusField.value = userInfo.getUserInfo().subtitle;
   formProfile.open();

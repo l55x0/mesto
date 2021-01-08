@@ -4,6 +4,7 @@ export default class UserInfo {
     this._subTitleContainer = subTitleContainer;
   }
 
+  // Метод вернет объект с информацией со страницы о пользователе
   getUserInfo() {
     this._profileValues = {};
     this._profileValues.title = this._titleContainer.textContent;
@@ -11,6 +12,7 @@ export default class UserInfo {
     return this._profileValues;
   }
 
+  // Метод берет нужные данные из массива данных и выводит на страницу
   setUserInfo(formData) {
     this._titleContainer.textContent = formData['popup-input-name'];
     this._subTitleContainer.textContent = formData['popup-input-status'];
