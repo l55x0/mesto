@@ -11,4 +11,5 @@ const presets = [
     corejs: { "version": 3 },
   }]
 ];
-module.exports = { presets };
+const plugins = ["@babel/plugin-proposal-class-properties"];
+module.exports = { presets, plugins };
