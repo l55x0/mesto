@@ -31,7 +31,6 @@ function creatureCard(item) {
     data: item,
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
-      popupImage.setEventListeners();
     }
   }, '.places-template');
 
@@ -85,9 +84,10 @@ editPupupValidator.enableValidation();
 const addPupupValidator = new FormValidator(validationConfigPopup, popupFormAddContainer);
 addPupupValidator.enableValidation();
 
-// Слушатели событий для форм
-const profileFormEvt = formProfile.setEventListeners();
-const addCardFormEvt = formAddCard.setEventListeners();
+// Слушатели событий для форм, попапа картинки
+popupImage.setEventListeners();
+formProfile.setEventListeners();
+formAddCard.setEventListeners();
 
 // Отслеживаем событие клика кнопки "редактировать" 
 profileEditButton.addEventListener('click', () => {
@@ -95,11 +95,9 @@ profileEditButton.addEventListener('click', () => {
   popupNameField.value = dataUserInfo.title;
   popupStatusField.value = dataUserInfo.subtitle;
   formProfile.open();
-  profileFormEvt
 });
 
 // Отслеживаем событие клика кнопки "добавить карточку" 
 profileAddButton.addEventListener('click', () => {
   formAddCard.open();
-  addCardFormEvt
 });
