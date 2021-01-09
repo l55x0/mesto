@@ -20,6 +20,7 @@ export default class Card {
   // Метод удаляет карточку из DOM
   _deleteClickHandler = () => {
     this._element.remove();
+    delete this._element
   };
 
   // Метод добавляет-удаляет класс на кнопке лайк

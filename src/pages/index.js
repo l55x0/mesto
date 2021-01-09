@@ -22,23 +22,27 @@ import {
   popupStatusField
 } from '../utils/constants.js';
 
+// Экземпляр формы с картинкой и тектом
+const popupImage = new PopupWithImage(popupImageContainer);
+
+// Функция создающая экземпляр класса Card
+function creatureCard(item) {
+  const card = new Card({
+    data: item,
+    handleCardClick: (name, link) => {
+      popupImage.open(name, link);
+      popupImage.setEventListeners();
+    }
+  }, '.places-template');
+
+  return card;
+}
 
 // Константа содержащая в себе все карточки
 const cardsList = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card = new Card({
-      data: item,
-      handleCardClick: (name, link) => {
-        const popupImage = new PopupWithImage({
-          name: name,
-          link: link
-        }, popupImageContainer);
-        popupImage.open();
-        popupImage.setEventListeners();
-      }
-    }, '.places-template');
-    const cardElement = card.generateCard();
+    const cardElement = creatureCard(item).generateCard();
     cardsList.setItem(cardElement);
   },
 },
@@ -50,20 +54,7 @@ const formAddCard = new PopupWithForm({
   submitForm: (formData) => {
     formData['name'] = formData['popup-input-place-name'];
     formData['link'] = formData['popup-input-url'];
-    delete formData['popup-input-place-name'];
-    delete formData['popup-input-url'];
-    const card = new Card({
-      data: formData,
-      handleCardClick: (name, link) => {
-        const popupImage = new PopupWithImage({
-          name: name,
-          link: link
-        }, popupImageContainer);
-        popupImage.open();
-        popupImage.setEventListeners();
-      }
-    }, '.places-template');
-    const cardElement = card.generateCard();
+    const cardElement = creatureCard(formData).generateCard();
     cardsList.setItem(cardElement);
   },
   container: popupAddCardContainer
@@ -94,16 +85,21 @@ editPupupValidator.enableValidation();
 const addPupupValidator = new FormValidator(validationConfigPopup, popupFormAddContainer);
 addPupupValidator.enableValidation();
 
+// Слушатели событий для форм
+const profileFormEvt = formProfile.setEventListeners();
+const addCardFormEvt = formAddCard.setEventListeners();
+
 // Отслеживаем событие клика кнопки "редактировать" 
 profileEditButton.addEventListener('click', () => {
-  popupNameField.value = userInfo.getUserInfo().title;
-  popupStatusField.value = userInfo.getUserInfo().subtitle;
+  const dataUserInfo = userInfo.getUserInfo();
+  popupNameField.value = dataUserInfo.title;
+  popupStatusField.value = dataUserInfo.subtitle;
   formProfile.open();
-  formProfile.setEventListeners();
+  profileFormEvt
 });
 
 // Отслеживаем событие клика кнопки "добавить карточку" 
 profileAddButton.addEventListener('click', () => {
   formAddCard.open();
-  formAddCard.setEventListeners();
+  addCardFormEvt
 });
