@@ -33,8 +33,10 @@
 @import url('../blocks/place/__button-remove/place__button-remove.css');
 @import url('../blocks/place/__row-block/place__row-block.css');
 @import url('../blocks/place/__title/place__title.css');
+@import url('../blocks/place/__colum-block/place__column-block.css');
 @import url('../blocks/place/__button-like/place__button-like.css');
 @import url('../blocks/place/__button-like/_active/place__button-like_active.css');
+@import url('../blocks/place/__score-like/place__score-like.css');
 /* Footer */
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/footer__author/footer__author.css');
