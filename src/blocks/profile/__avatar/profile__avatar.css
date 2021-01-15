@@ -3,6 +3,7 @@
   border-radius: 50%;
   max-width: 120px;
   object-fit: cover;
+  height: 120px;
 }
 
 @media screen and (max-width: 915px) {

@@ -1,4 +1,5 @@
 import './index.css'
+import Api from '../components/Api.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -19,8 +20,41 @@ import {
   profileTitleContainer,
   profileSubtitleContainer,
   popupNameField,
-  popupStatusField
+  popupStatusField,
+  profileAvatarContainer
 } from '../utils/constants.js';
+
+// GET запрос данных о юзеере и размещение их на странице
+fetch('https://mesto.nomoreparties.co/v1/cohort-19/users/me', {
+  headers: {
+    authorization: '429ceaf1-0a34-48aa-a4c9-c70c2c79ac6e'
+  }
+})
+  .then(res => res.json())
+  .then((data) => {
+    profileAvatarContainer.src = data.avatar
+    profileTitleContainer.textContent = data.name
+    profileSubtitleContainer.textContent = data.about
+  });
+
+// Не получается вывести данные из json массива???
+// const api = new Api({
+//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-19/cards',
+//   headers: {
+//     authorization: '429ceaf1-0a34-48aa-a4c9-c70c2c79ac6e',
+//     'Content-Type': 'application/json'
+//   }
+// });
+
+// api.getInitialCards()
+//   .then(result => {
+//     // cardsList.data = result;
+//     console.log(result)
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
 
 // Экземпляр формы с картинкой и тектом
 const popupImage = new PopupWithImage(popupImageContainer);

@@ -46,6 +46,7 @@ export const popupFormEditContainer = document.querySelector('#popup-form-edit')
 export const popupNameField = document.querySelector('.popup__input_type_author');
 export const popupStatusField = document.querySelector('.popup__input_type_status');
 // Выбираем элементы блока Profile
+export const profileAvatarContainer = document.querySelector('.profile__avatar')
 export const profileTitleContainer = document.querySelector('.profile__author');
 export const profileSubtitleContainer = document.querySelector('.profile__status');
 export const profileEditButton = document.querySelector('.profile__button-edit');
