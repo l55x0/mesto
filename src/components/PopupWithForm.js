@@ -1,15 +1,15 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-  constructor({ submitForm, container }) {
-    super(container);
+  constructor({ submitForm }, containerSelector) {
+    super(containerSelector);
     this._submitForm = submitForm;
-    this._formSelector = this._container.querySelector('.popup__form');
+    this._formContainer = this._container.querySelector('.popup__form');
   }
 
   // Метод собирает информацию с полей формы и возвращает объектом
   _getInputValues() {
-    this._inputList = this._formSelector.querySelectorAll('.popup__input');
+    this._inputList = this._formContainer.querySelectorAll('.popup__input');
     this._formValues = {};
     this._inputList.forEach(input => {
       this._formValues[input.name] = input.value;
@@ -20,12 +20,12 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._formSelector.reset();
+    this._formContainer.reset();
   };
 
   setEventListeners() {
     super.setEventListeners();
-    this._formSelector.addEventListener('submit', this._handleSubmitForm);
+    this._formContainer.addEventListener('submit', this._handleSubmitForm);
   }
 
   // метод описывает функционал события отправки формы

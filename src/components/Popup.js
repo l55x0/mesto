@@ -1,6 +1,6 @@
 export default class Popup {
-  constructor(container) {
-    this._container = container;
+  constructor(containerSelector) {
+    this._container = document.querySelector(`${containerSelector}`);
   }
 
   // Метод открытия попапа

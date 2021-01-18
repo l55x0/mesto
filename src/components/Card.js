@@ -4,6 +4,9 @@ export default class Card {
     this._name = data.name;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+
+    // this._like = false;
+    // this._scoreLike = data.likes.length;
   };
 
   // Метод возвращает шаблон карточки из DOM
@@ -20,12 +23,13 @@ export default class Card {
   // Метод удаляет карточку из DOM
   _deleteClickHandler = () => {
     this._element.remove();
-    delete this._element
+    this._element = null;
   };
 
   // Метод добавляет-удаляет класс на кнопке лайк
   _likeClickHandler = () => {
     this._placeButtonLike.classList.toggle("place__button-like_active");
+    // this._like = !this._like
   };
 
   // Метод вешает слушатели событий
@@ -44,12 +48,14 @@ export default class Card {
     this._elementTitle = this._element.querySelector(".place__title");
     this._placeButtonLike = this._element.querySelector(".place__button-like");
     this._placeButtonRemove = this._element.querySelector(".place__button-remove");
+    // this._placeScoreLike = this._element.querySelector(".place__score-like");
     this._setEventListeners();
 
 
     this._elementTitle.textContent = this._name;
     this._elementImage.src = this._link;
     this._elementImage.alt = 'Фотография местности ' + this._name;
+    // this._placeScoreLike.textContent = this._scoreLike;
 
     return this._element;
   };

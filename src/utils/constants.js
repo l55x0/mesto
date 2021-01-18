@@ -1,5 +1,5 @@
-// массив 6 стандартных карточек 
-export const initialCards = [
+// Карточки для добавления
+const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -36,9 +36,9 @@ export const validationConfigPopup = {
 };
 
 // Выбираем элементы Popup's
-export const popupProfileContainer = document.querySelector('#popup-profile');
-export const popupAddCardContainer = document.querySelector('#popup-add-card');
-export const popupImageContainer = document.querySelector('#popup-image');
+export const popupProfileId = '#popup-profile';
+export const popupAddCardId = '#popup-add-card';
+export const popupImageId = '#popup-image';
 // Выбираем формы по id 
 export const popupFormAddContainer = document.querySelector('#popup-form-add');
 export const popupFormEditContainer = document.querySelector('#popup-form-edit');
@@ -52,4 +52,4 @@ export const profileSubtitleContainer = document.querySelector('.profile__status
 export const profileEditButton = document.querySelector('.profile__button-edit');
 export const profileAddButton = document.querySelector('.profile__button-add');
 // Выбираем контейнер для карточек
-export const placesListContainer = document.querySelector('.places');
+export const placesListSelector = '.places';

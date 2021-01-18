@@ -7,16 +7,15 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import {
-  initialCards,
   validationConfigPopup,
   profileEditButton,
   profileAddButton,
   popupFormAddContainer,
   popupFormEditContainer,
-  popupImageContainer,
-  placesListContainer,
-  popupAddCardContainer,
-  popupProfileContainer,
+  popupImageId,
+  placesListSelector,
+  popupAddCardId,
+  popupProfileId,
   profileTitleContainer,
   profileSubtitleContainer,
   popupNameField,
@@ -24,40 +23,33 @@ import {
   profileAvatarContainer
 } from '../utils/constants.js';
 
-// GET запрос данных о юзеере и размещение их на странице
-fetch('https://mesto.nomoreparties.co/v1/cohort-19/users/me', {
-  headers: {
-    authorization: '429ceaf1-0a34-48aa-a4c9-c70c2c79ac6e'
-  }
-})
-  .then(res => res.json())
-  .then((data) => {
-    profileAvatarContainer.src = data.avatar
-    profileTitleContainer.textContent = data.name
-    profileSubtitleContainer.textContent = data.about
-  });
 
-// Не получается вывести данные из json массива???
-// const api = new Api({
-//   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-19/cards',
-//   headers: {
-//     authorization: '429ceaf1-0a34-48aa-a4c9-c70c2c79ac6e',
-//     'Content-Type': 'application/json'
-//   }
-// });
+// Экземпляр класса API 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1',
+  token: '429ceaf1-0a34-48aa-a4c9-c70c2c79ac6e',
+  groupId: 'cohort-19'
+});
 
-// api.getInitialCards()
-//   .then(result => {
-//     // cardsList.data = result;
-//     console.log(result)
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+api.getInitialCards()
+  .then(result => {
+    console.log(result)
+    cardsList.renderItems(result)
+  })
+  .catch(err => console.log(`Error: ${err}`));
+
+api.getInfoUser()
+  .then(result => {
+    console.log(result);
+    profileAvatarContainer.src = result.avatar
+    profileTitleContainer.textContent = result.name
+    profileSubtitleContainer.textContent = result.about
+  })
+  .catch(err => console.log(`Error: ${err}`));
 
 
 // Экземпляр формы с картинкой и тектом
-const popupImage = new PopupWithImage(popupImageContainer);
+const popupImage = new PopupWithImage(popupImageId);
 
 // Функция создающая экземпляр класса Card
 function creatureCard(item) {
@@ -73,13 +65,12 @@ function creatureCard(item) {
 
 // Константа содержащая в себе все карточки
 const cardsList = new Section({
-  data: initialCards,
   renderer: (item) => {
     const cardElement = creatureCard(item).generateCard();
     cardsList.setItem(cardElement);
   },
 },
-  placesListContainer
+  placesListSelector
 );
 
 // Константа содержащая в себе карточку с данными из формы
@@ -87,11 +78,13 @@ const formAddCard = new PopupWithForm({
   submitForm: (formData) => {
     formData['name'] = formData['popup-input-place-name'];
     formData['link'] = formData['popup-input-url'];
+    // api.addCard(formData); // отправка карточки на сервер
     const cardElement = creatureCard(formData).generateCard();
-    cardsList.setItem(cardElement);
+    cardsList.setItemUp(cardElement);
   },
-  container: popupAddCardContainer
-});
+},
+  popupAddCardId
+);
 
 // Экземпляр класса с информацией юзера
 const userInfo = new UserInfo({
@@ -103,12 +96,11 @@ const userInfo = new UserInfo({
 const formProfile = new PopupWithForm({
   submitForm: (formData) => {
     userInfo.setUserInfo(formData);
+    api.editInfoUser(formData)
   },
-  container: popupProfileContainer
-});
-
-// Отрисовка карточек
-cardsList.renderItems();
+},
+  popupProfileId
+);
 
 // Создаем валидацию для формы редактирования профиля
 const editPupupValidator = new FormValidator(validationConfigPopup, popupFormEditContainer);
