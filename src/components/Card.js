@@ -2,6 +2,7 @@ export default class Card {
   constructor({ data, handleCardClick }, cardSelector) {
     this._link = data.link;
     this._name = data.name;
+    this._idOwner = data.owner._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
 
@@ -49,7 +50,12 @@ export default class Card {
     this._placeButtonLike = this._element.querySelector(".place__button-like");
     this._placeButtonRemove = this._element.querySelector(".place__button-remove");
     // this._placeScoreLike = this._element.querySelector(".place__score-like");
+    if (this._idOwner != "2e92a6c71981ac3f1ba79192") {
+      this._placeButtonRemove.remove();
+    }
+
     this._setEventListeners();
+
 
 
     this._elementTitle.textContent = this._name;

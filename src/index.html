@@ -69,6 +69,25 @@
         </form>
       </div>
     </section>
+    <section class="popup" id="popup-add-avatar">
+      <div class="popup__container">
+        <button class="button popup__button-close" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="popup-form" id="popup-form-add-avatar">
+          <input class="popup__input popup__input_type_photo" type="url" placeholder="Ссылка на аватар"
+            name="popup-input-url-avatar" required>
+          <span id="popup-input-url-avatar-error" class="popup__error"></span>
+          <button class="button popup__button-submit" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+    <section class="popup" id="popup-remove-card">
+      <div class="popup__container">
+        <button class="button popup__button-close" type="button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button class="button popup__button-remove" type="submit">Да</button>
+      </div>
+    </section>
     <section class="popup popup_blackout" id="popup-image">
       <figure class="popup__figure">
         <button class="button popup__button-close" type="button"></button>

@@ -32,7 +32,7 @@ export const validationConfigPopup = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-submit',
   inputInvalidClass: 'popup__input_state_invalid',
-  buttonInvalidClass: 'popup__button-submit_invalid',
+  buttonInvalidClass: 'popup__button-submit_invalid'
 };
 
 // Выбираем элементы Popup's
@@ -42,6 +42,8 @@ export const popupImageId = '#popup-image';
 // Выбираем формы по id 
 export const popupFormAddContainer = document.querySelector('#popup-form-add');
 export const popupFormEditContainer = document.querySelector('#popup-form-edit');
+export const popupFormAddAvatarContainer = document.querySelector('#popup-form-add-avatar');
+
 // Выбираем елементы форм
 export const popupNameField = document.querySelector('.popup__input_type_author');
 export const popupStatusField = document.querySelector('.popup__input_type_status');

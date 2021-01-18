@@ -12,6 +12,7 @@ import {
   profileAddButton,
   popupFormAddContainer,
   popupFormEditContainer,
+  popupFormAddAvatarContainer,
   popupImageId,
   placesListSelector,
   popupAddCardId,
@@ -78,7 +79,8 @@ const formAddCard = new PopupWithForm({
   submitForm: (formData) => {
     formData['name'] = formData['popup-input-place-name'];
     formData['link'] = formData['popup-input-url'];
-    // api.addCard(formData); // отправка карточки на сервер
+    formData['owner'] = { _id: '' };
+    // api.addCard(formData); // отправка карточки на server
     const cardElement = creatureCard(formData).generateCard();
     cardsList.setItemUp(cardElement);
   },
@@ -103,12 +105,16 @@ const formProfile = new PopupWithForm({
 );
 
 // Создаем валидацию для формы редактирования профиля
-const editPupupValidator = new FormValidator(validationConfigPopup, popupFormEditContainer);
-editPupupValidator.enableValidation();
+const editPopupValidator = new FormValidator(validationConfigPopup, popupFormEditContainer);
+editPopupValidator.enableValidation();
 
 // Создаем валидацию для формы добавления новой картоки
-const addPupupValidator = new FormValidator(validationConfigPopup, popupFormAddContainer);
-addPupupValidator.enableValidation();
+const addPopupValidator = new FormValidator(validationConfigPopup, popupFormAddContainer);
+addPopupValidator.enableValidation();
+
+// Создаем валидацию для формы добавления новой аватарки
+const addAvatarPopupValidator = new FormValidator(validationConfigPopup, popupFormAddAvatarContainer);
+addAvatarPopupValidator.enableValidation();
 
 // Слушатели событий для форм, попапа картинки
 popupImage.setEventListeners();
