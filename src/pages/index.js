@@ -3,6 +3,7 @@ import Api from '../components/Api.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import PopupWithRemove from '../components/PopupWithRemove.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
@@ -54,18 +55,21 @@ api.getInfoUser()
 // Экземпляр формы с картинкой и тектом
 const popupImage = new PopupWithImage(popupImageId);
 
-// Функция создает экземпляр попапа для подтверждения удаления карточки
+function creatPopupRemoveCard(card) {
+  const popupRemoveCard = new PopupWithRemove({
+    handleRemoveClick: () => {
+      api.removeCard(card.getId())
+        .then((res) => {
+          card.deleteCard()
+        })
+        .catch(err => console.log(`Error: ${err}`));
+      popupRemoveCard.close();
+    }
+  }, popupRemoveCardId);
 
-const popupRemoveCard = new PopupWithForm({
-  submitForm: () => {
-    api.removeCard(card.getId())
-      .then((res) => {
-        card.deleteCard()
-      })
-      .catch(err => console.log(`Error: ${err}`));
-  }
-}, popupRemoveCardId);
-
+  popupRemoveCard.open()
+  popupRemoveCard.setEventListeners()
+}
 
 function addLike(card) {
   api.addLike(card.getId())
@@ -83,7 +87,6 @@ function removeLike(card) {
     .catch(err => console.log(`Error: ${err}`))
 }
 
-
 // Функция создающая экземпляр класса Card
 function creatureCard(item) {
   const card = new Card({
@@ -92,7 +95,7 @@ function creatureCard(item) {
       popupImage.open(name, link);
     },
     removeClickHandler: () => {
-      popupRemoveCard.open()
+      creatPopupRemoveCard(card)
     },
     likeClickHandler: (evt) => {
       if (!evt.target.classList.contains("place__button-like_active")) {
@@ -185,7 +188,6 @@ popupImage.setEventListeners();
 formProfile.setEventListeners();
 formAddCard.setEventListeners();
 formProfileAvatar.setEventListeners();
-popupRemoveCard.setEventListeners();
 
 
 // Отслеживаем событие клика кнопки "редактировать" 
