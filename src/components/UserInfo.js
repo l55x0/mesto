@@ -13,8 +13,8 @@ export default class UserInfo {
   }
 
   // Метод берет нужные данные из массива данных и выводит на страницу
-  setUserInfo(formData) {
-    this._titleContainer.textContent = formData['popup-input-name'];
-    this._subTitleContainer.textContent = formData['popup-input-status'];
+  setUserInfo(data) {
+    this._titleContainer.textContent = data.name;
+    this._subTitleContainer.textContent = data.about;
   }
 }

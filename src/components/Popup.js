@@ -33,4 +33,5 @@ export default class Popup {
   setEventListeners() {
     this._container.addEventListener('click', this._handleClickContainer);
   }
+
 }

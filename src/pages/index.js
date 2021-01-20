@@ -17,6 +17,8 @@ import {
   placesListSelector,
   popupAddCardId,
   popupProfileId,
+  popupRemoveCardId,
+  popupEditAvatarId,
   profileTitleContainer,
   profileSubtitleContainer,
   popupNameField,
@@ -32,19 +34,19 @@ const api = new Api({
   groupId: 'cohort-19'
 });
 
+// Прием объекта по Апи с свервера и перебор элементов
 api.getInitialCards()
-  .then(result => {
-    console.log(result)
-    cardsList.renderItems(result)
+  .then(res => {
+    cardsList.renderItems(res)
   })
   .catch(err => console.log(`Error: ${err}`));
 
+// Прием информации о пользователе и публикация на странице
 api.getInfoUser()
-  .then(result => {
-    console.log(result);
-    profileAvatarContainer.src = result.avatar
-    profileTitleContainer.textContent = result.name
-    profileSubtitleContainer.textContent = result.about
+  .then(res => {
+    profileAvatarContainer.src = res.avatar
+    profileTitleContainer.textContent = res.name
+    profileSubtitleContainer.textContent = res.about
   })
   .catch(err => console.log(`Error: ${err}`));
 
@@ -52,12 +54,52 @@ api.getInfoUser()
 // Экземпляр формы с картинкой и тектом
 const popupImage = new PopupWithImage(popupImageId);
 
+// Функция создает экземпляр попапа для подтверждения удаления карточки
+
+const popupRemoveCard = new PopupWithForm({
+  submitForm: () => {
+    api.removeCard(card.getId())
+      .then((res) => {
+        card.deleteCard()
+      })
+      .catch(err => console.log(`Error: ${err}`));
+  }
+}, popupRemoveCardId);
+
+
+function addLike(card) {
+  api.addLike(card.getId())
+    .then((res) => {
+      card.like(res.likes.length)
+    })
+    .catch(err => console.log(`Error: ${err}`))
+}
+
+function removeLike(card) {
+  api.removeLike(card.getId())
+    .then((res) => {
+      card.like(res.likes.length)
+    })
+    .catch(err => console.log(`Error: ${err}`))
+}
+
+
 // Функция создающая экземпляр класса Card
 function creatureCard(item) {
   const card = new Card({
     data: item,
     handleCardClick: (name, link) => {
       popupImage.open(name, link);
+    },
+    removeClickHandler: () => {
+      popupRemoveCard.open()
+    },
+    likeClickHandler: (evt) => {
+      if (!evt.target.classList.contains("place__button-like_active")) {
+        addLike(card)
+      } else {
+        removeLike(card)
+      }
     }
   }, '.places-template');
 
@@ -77,12 +119,14 @@ const cardsList = new Section({
 // Константа содержащая в себе карточку с данными из формы
 const formAddCard = new PopupWithForm({
   submitForm: (formData) => {
-    formData['name'] = formData['popup-input-place-name'];
-    formData['link'] = formData['popup-input-url'];
-    formData['owner'] = { _id: '' };
-    // api.addCard(formData); // отправка карточки на server
-    const cardElement = creatureCard(formData).generateCard();
-    cardsList.setItemUp(cardElement);
+    formAddCard.renderLoading(true)
+    api.addCard(formData)
+      .then((res) => {
+        const cardElement = creatureCard(res).generateCard();
+        cardsList.setItemUp(cardElement);
+      })
+      .catch(err => console.log(`Error: ${err}`))
+      .finally(formAddCard.renderLoading(false))
   },
 },
   popupAddCardId
@@ -97,11 +141,31 @@ const userInfo = new UserInfo({
 // Экземпляр класса с формой для информации о юзере
 const formProfile = new PopupWithForm({
   submitForm: (formData) => {
-    userInfo.setUserInfo(formData);
+    formProfile.renderLoading(true)
     api.editInfoUser(formData)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+      })
+      .catch(err => console.log(`Error: ${err}`))
+      .finally(formProfile.renderLoading(false))
   },
 },
   popupProfileId
+);
+
+// Экземпляр попапа для смены Аватара
+const formProfileAvatar = new PopupWithForm({
+  submitForm: (formData) => {
+    formProfile.renderLoading(true)
+    api.editUserAvatar(formData)
+      .then((res) => {
+        profileAvatarContainer.src = res.avatar;
+      })
+      .catch(err => console.log(`Error: ${err}`))
+      .finally(formProfile.renderLoading(false))
+  },
+},
+  popupEditAvatarId
 );
 
 // Создаем валидацию для формы редактирования профиля
@@ -120,6 +184,9 @@ addAvatarPopupValidator.enableValidation();
 popupImage.setEventListeners();
 formProfile.setEventListeners();
 formAddCard.setEventListeners();
+formProfileAvatar.setEventListeners();
+popupRemoveCard.setEventListeners();
+
 
 // Отслеживаем событие клика кнопки "редактировать" 
 profileEditButton.addEventListener('click', () => {
@@ -132,4 +199,9 @@ profileEditButton.addEventListener('click', () => {
 // Отслеживаем событие клика кнопки "добавить карточку" 
 profileAddButton.addEventListener('click', () => {
   formAddCard.open();
+});
+
+// Отслеживаем событие клика на аватарку
+profileAvatarContainer.addEventListener('click', () => {
+  formProfileAvatar.open();
 });

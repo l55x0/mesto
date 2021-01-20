@@ -1,31 +1,3 @@
-// Карточки для добавления
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // конфиг селекторов Popup
 export const validationConfigPopup = {
   formSelector: '.popup__form',
@@ -39,6 +11,9 @@ export const validationConfigPopup = {
 export const popupProfileId = '#popup-profile';
 export const popupAddCardId = '#popup-add-card';
 export const popupImageId = '#popup-image';
+export const popupRemoveCardId = '#popup-remove-card';
+export const popupEditAvatarId = '#popup-add-avatar';
+
 // Выбираем формы по id 
 export const popupFormAddContainer = document.querySelector('#popup-form-add');
 export const popupFormEditContainer = document.querySelector('#popup-form-edit');

@@ -1,13 +1,61 @@
 export default class Card {
-  constructor({ data, handleCardClick }, cardSelector) {
+  constructor({ data, handleCardClick, removeClickHandler, likeClickHandler }, cardSelector) {
+    this._data = data
     this._link = data.link;
     this._name = data.name;
     this._idOwner = data.owner._id;
+    this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._removeClickHandler = removeClickHandler;
+    this._scoreLike = data.likes.length;
+    this._likeClickHandler = likeClickHandler;
+  };
 
-    // this._like = false;
-    // this._scoreLike = data.likes.length;
+  // Метод удаляет карточку из DOM
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+  };
+
+  // Метод вернет id карточки
+  getId() {
+    return this._id;
+  }
+
+  // Метод добавляет-удаляет класс на кнопке лайк
+  like(quantity) {
+    this._placeButtonLike.classList.toggle("place__button-like_active");
+    this._placeScoreLike.textContent = quantity;
+  }
+
+  // Метод генерирует и возвращает карточку 
+  generateCard = () => {
+    this._element = this._getTemplate();
+    this._elementImage = this._element.querySelector(".place__image");
+    this._elementTitle = this._element.querySelector(".place__title");
+    this._placeButtonLike = this._element.querySelector(".place__button-like");
+    this._placeButtonRemove = this._element.querySelector(".place__button-remove");
+    this._placeScoreLike = this._element.querySelector(".place__score-like");
+    this._ownersLike = {}
+    this._data.likes.forEach(el => { this._ownersLike = el });
+
+    if (this._idOwner != "2e92a6c71981ac3f1ba79192") {
+      this._placeButtonRemove.remove();
+    }
+
+    if (this._ownersLike._id === "2e92a6c71981ac3f1ba79192") {
+      this._placeButtonLike.classList.add("place__button-like_active");
+    }
+
+    this._setEventListeners();
+
+    this._elementTitle.textContent = this._name;
+    this._elementImage.src = this._link;
+    this._elementImage.alt = 'Фотография местности ' + this._name;
+    this._placeScoreLike.textContent = this._scoreLike;
+
+    return this._element;
   };
 
   // Метод возвращает шаблон карточки из DOM
@@ -21,48 +69,12 @@ export default class Card {
     return cardElement;
   };
 
-  // Метод удаляет карточку из DOM
-  _deleteClickHandler = () => {
-    this._element.remove();
-    this._element = null;
-  };
-
-  // Метод добавляет-удаляет класс на кнопке лайк
-  _likeClickHandler = () => {
-    this._placeButtonLike.classList.toggle("place__button-like_active");
-    // this._like = !this._like
-  };
-
   // Метод вешает слушатели событий
   _setEventListeners = () => {
-    this._placeButtonRemove.addEventListener('click', this._deleteClickHandler);
+    this._placeButtonRemove.addEventListener('click', this._removeClickHandler);
     this._placeButtonLike.addEventListener('click', this._likeClickHandler);
     this._elementImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
-  };
-
-  // Метод генерирует и возвращает карточку 
-  generateCard = () => {
-    this._element = this._getTemplate();
-    this._elementImage = this._element.querySelector(".place__image");
-    this._elementTitle = this._element.querySelector(".place__title");
-    this._placeButtonLike = this._element.querySelector(".place__button-like");
-    this._placeButtonRemove = this._element.querySelector(".place__button-remove");
-    // this._placeScoreLike = this._element.querySelector(".place__score-like");
-    if (this._idOwner != "2e92a6c71981ac3f1ba79192") {
-      this._placeButtonRemove.remove();
-    }
-
-    this._setEventListeners();
-
-
-
-    this._elementTitle.textContent = this._name;
-    this._elementImage.src = this._link;
-    this._elementImage.alt = 'Фотография местности ' + this._name;
-    // this._placeScoreLike.textContent = this._scoreLike;
-
-    return this._element;
   };
 };
