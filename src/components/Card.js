@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ data, handleCardClick, removeClickHandler, likeClickHandler }, cardSelector) {
+  constructor({ data, handleCardClick, removeClickHandler, likeClickHandler, currentUserId }, cardSelector) {
     this._data = data
     this._link = data.link;
     this._name = data.name;
@@ -10,6 +10,7 @@ export default class Card {
     this._removeClickHandler = removeClickHandler;
     this._scoreLike = data.likes.length;
     this._likeClickHandler = likeClickHandler;
+    this._userId = currentUserId;
   };
 
   // Метод удаляет карточку из DOM
@@ -37,15 +38,15 @@ export default class Card {
     this._placeButtonLike = this._element.querySelector(".place__button-like");
     this._placeButtonRemove = this._element.querySelector(".place__button-remove");
     this._placeScoreLike = this._element.querySelector(".place__score-like");
-    this._ownersLike = {}
-    this._data.likes.forEach(el => { this._ownersLike = el });
 
-    if (this._idOwner != "2e92a6c71981ac3f1ba79192") {
+    this._data.likes.forEach(elem => {
+      if (elem._id === this._userId) {
+        this._placeButtonLike.classList.add("place__button-like_active");
+      }
+    });
+
+    if (this._idOwner != this._userId) {
       this._placeButtonRemove.remove();
-    }
-
-    if (this._ownersLike._id === "2e92a6c71981ac3f1ba79192") {
-      this._placeButtonLike.classList.add("place__button-like_active");
     }
 
     this._setEventListeners();

@@ -97,5 +97,4 @@ export default class Api {
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`))
   }
-
 }
