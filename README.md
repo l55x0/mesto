@@ -10,7 +10,13 @@
 https://lod55.github.io/mesto/
 
 ## В работе использовались:
-- [X] CSS, HTML, JS, Node.js(npm), Webpack, Nested БЭМ, git
+- [X] Nested БЭМ
+- [X] git
+- [X] HTML
+- [X] CSS 
+- [X] JS
+- [X] Node.js(npm)
+- [X] Webpack
 
 ## Возможности веб-приложения:
 - [X] реализован отзывчивый дизайн с 2-мя чек пойнтами 320px 1280px
