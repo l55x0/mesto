@@ -1,7 +1,7 @@
 {
-  "name": "mesto",
+  "name": "Mesto Russia JS",
   "version": "1.0.0",
-  "description": "Учебный проект \"Места России\". Адрес сайта на gh-pages (https://lod55.github.io/mesto/)",
+  "description": "Учебный проект \"Места России\"",
   "main": "index.js",
   "directories": {
     "test": "test"
