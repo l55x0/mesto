@@ -13,11 +13,11 @@
     margin: 0 auto;
     text-align: center;
   }
-} 
+}
 
 @media screen and (max-width: 373px) {
   .profile__status {
     font-size: 14px;
     line-height: 17px;
   }
-} 
+}

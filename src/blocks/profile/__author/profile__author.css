@@ -12,11 +12,11 @@
   .profile__author {
     text-align: center;
   }
-} 
+}
 
 @media screen and (max-width: 373px) {
   .profile__author {
     margin: 0 7px 0 0;
     font-size: 27px;
   }
-} 
+}

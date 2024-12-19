@@ -6,7 +6,7 @@ export default class Section {
 
   // Метод перебирает элементы и применяет к ним функцию колл бэк
   renderItems(items) {
-    items.forEach(item => {
+    items.forEach((item) => {
       this._renderer(item);
     });
   }

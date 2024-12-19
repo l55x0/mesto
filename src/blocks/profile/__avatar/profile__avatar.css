@@ -9,5 +9,5 @@
 .profile__avatar:hover {
   cursor: pointer;
   outline-style: none;
-  opacity: .2;
+  opacity: 0.2;
 }

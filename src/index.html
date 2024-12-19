@@ -1,118 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Проект «Места России» на Яндекс.Практикум."
+    />
+    <meta name="keywords" content="russian, travel, project, photo" />
+    <meta name="author" content="Lod55" />
+    <title>Места России</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Проект «Места России» на Яндекс.Практикум.">
-  <meta name="keywords" content="russian, travel, project, photo">
-  <meta name="author" content="Lod55">
-  <title>Места России</title>
-</head>
+  <body class="page">
+    <div class="page__container">
+      <header class="header page__header">
+        <img
+          src="<%=require('./images/Logo.svg')%>"
+          alt="Логотип Маста России"
+          class="header__logo"
+        />
+      </header>
 
-<body class="page">
-  <div class="page__container">
-    <header class="header page__header">
-      <img src="<%=require('./images/Logo.svg')%>" alt="Логотип Маста России" class="header__logo">
-    </header>
-
-    <main class="content page__content">
-
-      <section class="profile content__item">
-        <div class="profile__overlay">
-          <img src="#" alt="Изображение Автора" class="profile__avatar">
-        </div>
-        <div class="profile__text-block">
-          <div class="profile__row-block">
-            <h1 class="profile__author"></h1>
-            <button class="button profile__button-edit" type="button"></button>
+      <main class="content page__content">
+        <section class="profile content__item">
+          <div class="profile__overlay">
+            <img src="#" alt="Изображение Автора" class="profile__avatar" />
           </div>
-          <p class="profile__status"></p>
+          <div class="profile__text-block">
+            <div class="profile__row-block">
+              <h1 class="profile__author"></h1>
+              <button
+                class="button profile__button-edit"
+                type="button"
+              ></button>
+            </div>
+            <p class="profile__status"></p>
+          </div>
+          <button class="button profile__button-add" type="button"></button>
+        </section>
+        <section class="places content__item"></section>
+      </main>
+
+      <footer class="footer page__footer">
+        <p class="footer__author">&copy; 2020 Mesto Russia Lod55</p>
+      </footer>
+
+      <section class="popup" id="popup-profile">
+        <div class="popup__container">
+          <button class="button popup__button-close" type="button"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="popup-form" id="popup-form-edit">
+            <input
+              class="popup__input popup__input_type_author"
+              type="text"
+              placeholder="Ваше имя"
+              name="popup-input-name"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span id="popup-input-name-error" class="popup__error"></span>
+            <input
+              class="popup__input popup__input_type_status"
+              type="text"
+              placeholder="Расскажите о себе"
+              name="popup-input-status"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span id="popup-input-status-error" class="popup__error"></span>
+            <button class="button popup__button-submit" type="submit">
+              Сохранить
+            </button>
+          </form>
         </div>
-        <button class="button profile__button-add" type="button"></button>
       </section>
-      <section class="places content__item">
-      </section>
-
-    </main>
-
-    <footer class="footer page__footer">
-      <p class="footer__author">&copy; 2020 Mesto Russia Lod55</p>
-    </footer>
-
-    <section class="popup" id="popup-profile">
-      <div class="popup__container">
-        <button class="button popup__button-close" type="button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form" id="popup-form-edit">
-          <input class="popup__input popup__input_type_author" type="text" placeholder="Ваше имя"
-            name="popup-input-name" minlength="2" maxlength="40" required>
-          <span id="popup-input-name-error" class="popup__error"></span>
-          <input class="popup__input popup__input_type_status" type="text" placeholder="Расскажите о себе"
-            name="popup-input-status" minlength="2" maxlength="200" required>
-          <span id="popup-input-status-error" class="popup__error"></span>
-          <button class="button popup__button-submit" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </section>
-    <section class="popup" id="popup-add-card">
-      <div class="popup__container">
-        <button class="button popup__button-close" type="button"></button>
-        <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popup-form" id="popup-form-add">
-          <input class="popup__input popup__input_type_place-name" type="text" placeholder="Название"
-            name="popup-input-place-name" minlength="2" maxlength="30" required>
-          <span id="popup-input-place-name-error" class="popup__error"></span>
-          <input class="popup__input popup__input_type_photo" type="url" placeholder="Ссылка на картинку"
-            name="popup-input-url" required>
-          <span id="popup-input-url-error" class="popup__error"></span>
-          <button class="button popup__button-submit" type="submit">Создать</button>
-        </form>
-      </div>
-    </section>
-    <section class="popup" id="popup-add-avatar">
-      <div class="popup__container">
-        <button class="button popup__button-close" type="button"></button>
-        <h2 class="popup__title">Обновить аватар</h2>
-        <form class="popup__form" name="popup-form" id="popup-form-add-avatar">
-          <input class="popup__input popup__input_type_photo" type="url" placeholder="Ссылка на аватар"
-            name="popup-input-url-avatar" required>
-          <span id="popup-input-url-avatar-error" class="popup__error"></span>
-          <button class="button popup__button-submit" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </section>
-    <section class="popup" id="popup-remove-card">
-      <div class="popup__container">
-        <button class="button popup__button-close" type="button"></button>
-        <h2 class="popup__title">Вы уверены?</h2>
-        <button class="button popup__button-remove" type="button">Да</button>
-      </div>
-    </section>
-    <section class="popup popup_blackout" id="popup-image">
-      <figure class="popup__figure">
-        <button class="button popup__button-close" type="button"></button>
-        <img class="popup__image" alt="Картинка" src="#">
-        <figcaption class="popup__caption"></figcaption>
-      </figure>
-    </section>
-
-  </div>
-
-  <template class="places-template">
-    <article class="place">
-      <img class="place__image" alt="Картинка" src="#">
-      <button class="button place__button-remove" type="button"></button>
-      <div class="place__row-block">
-        <h2 class="place__title"></h2>
-        <div class="place__column-block">
-          <button class="button place__button-like" type="button"></button>
-          <span class="place__score-like">0</span>
+      <section class="popup" id="popup-add-card">
+        <div class="popup__container">
+          <button class="button popup__button-close" type="button"></button>
+          <h2 class="popup__title">Новое место</h2>
+          <form class="popup__form" name="popup-form" id="popup-form-add">
+            <input
+              class="popup__input popup__input_type_place-name"
+              type="text"
+              placeholder="Название"
+              name="popup-input-place-name"
+              minlength="2"
+              maxlength="30"
+              required
+            />
+            <span id="popup-input-place-name-error" class="popup__error"></span>
+            <input
+              class="popup__input popup__input_type_photo"
+              type="url"
+              placeholder="Ссылка на картинку"
+              name="popup-input-url"
+              required
+            />
+            <span id="popup-input-url-error" class="popup__error"></span>
+            <button class="button popup__button-submit" type="submit">
+              Создать
+            </button>
+          </form>
         </div>
-      </div>
-    </article>
-  </template>
-</body>
+      </section>
+      <section class="popup" id="popup-add-avatar">
+        <div class="popup__container">
+          <button class="button popup__button-close" type="button"></button>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form
+            class="popup__form"
+            name="popup-form"
+            id="popup-form-add-avatar"
+          >
+            <input
+              class="popup__input popup__input_type_photo"
+              type="url"
+              placeholder="Ссылка на аватар"
+              name="popup-input-url-avatar"
+              required
+            />
+            <span id="popup-input-url-avatar-error" class="popup__error"></span>
+            <button class="button popup__button-submit" type="submit">
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </section>
+      <section class="popup" id="popup-remove-card">
+        <div class="popup__container">
+          <button class="button popup__button-close" type="button"></button>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button class="button popup__button-remove" type="button">Да</button>
+        </div>
+      </section>
+      <section class="popup popup_blackout" id="popup-image">
+        <figure class="popup__figure">
+          <button class="button popup__button-close" type="button"></button>
+          <img class="popup__image" alt="Картинка" src="#" />
+          <figcaption class="popup__caption"></figcaption>
+        </figure>
+      </section>
+    </div>
 
+    <template class="places-template">
+      <article class="place">
+        <img class="place__image" alt="Картинка" src="#" />
+        <button class="button place__button-remove" type="button"></button>
+        <div class="place__row-block">
+          <h2 class="place__title"></h2>
+          <div class="place__column-block">
+            <button class="button place__button-like" type="button"></button>
+            <span class="place__score-like">0</span>
+          </div>
+        </div>
+      </article>
+    </template>
+  </body>
 </html>

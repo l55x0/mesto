@@ -1,5 +1,5 @@
 .popup__input {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   width: 100%;
   border: 0;
@@ -7,7 +7,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  border-bottom: 1px solid rgb(0, 0, 0, .2);
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
   box-sizing: border-box;
   outline: none;
   padding: 10px 0 13px;
@@ -21,7 +21,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: #C4C4C4;
+  color: #c4c4c4;
 }
 
 @media screen and (max-width: 373px) {
