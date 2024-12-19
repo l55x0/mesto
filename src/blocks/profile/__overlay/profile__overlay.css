@@ -11,7 +11,7 @@
 }
 
 .profile__overlay:hover {
-  background-image: url("../../../images/EditAvatar.png");
+  background-image: url('../../../images/EditAvatar.png');
   background-position: center;
   background-repeat: no-repeat;
 }

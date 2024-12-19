@@ -8,12 +8,12 @@ export default class FormValidator {
   enableValidation = () => {
     this._inputsList = this._form.querySelectorAll(this._config.inputSelector); // Ищем в DOM все поля ввода
     this._submitButton = this._form.querySelector(
-      this._config.submitButtonSelector,
+      this._config.submitButtonSelector
     ); // выбираем в DOM кнопку формы
     this._setEventListeners(this._form, this._config, this._submitButton);
 
     // Вешаем слушатель на сабытие отправки формы
-    this._form.addEventListener("submit", (evt) => {
+    this._form.addEventListener('submit', (evt) => {
       evt.preventDefault(); // убираем дефолтное поведение кнопки отправить форму
       this._disabledButton(this._submitButton, this._config);
     });
@@ -21,7 +21,7 @@ export default class FormValidator {
     this._setButtonState(
       this._submitButton,
       this._form.checkValidity(),
-      this._config,
+      this._config
     ); // определяем стартовое состояние кропки
   };
 
@@ -29,7 +29,7 @@ export default class FormValidator {
   _setEventListeners = (form, config, button) => {
     // обходим все поля ввода и вешаем на них слушатели
     this._inputsList.forEach((input) => {
-      input.addEventListener("input", () => {
+      input.addEventListener('input', () => {
         this._checkInputValidity(form, input, config); // проверям валидность формы
         this._setButtonState(button, form.checkValidity(), config); // проверяем состояние кнопки
       });
@@ -66,7 +66,7 @@ export default class FormValidator {
   // Функция убирающая показал ошибки
   _hideError = (form, input, config) => {
     const error = form.querySelector(`#${input.name}-error`); // Ищем в DOM поле ошибки по Name
-    error.textContent = ""; // Убираем текст ошибки
+    error.textContent = ''; // Убираем текст ошибки
     input.classList.remove(config.inputInvalidClass); // Удаляем класс невалидного инпута
   };
 

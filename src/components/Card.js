@@ -7,7 +7,7 @@ export default class Card {
       likeClickHandler,
       currentUserId,
     },
-    cardSelector,
+    cardSelector
   ) {
     this._data = data;
     this._link = data.link;
@@ -35,24 +35,24 @@ export default class Card {
 
   // Метод добавляет-удаляет класс на кнопке лайк
   like(quantity) {
-    this._placeButtonLike.classList.toggle("place__button-like_active");
+    this._placeButtonLike.classList.toggle('place__button-like_active');
     this._placeScoreLike.textContent = quantity;
   }
 
   // Метод генерирует и возвращает карточку
   generateCard = () => {
     this._element = this._getTemplate();
-    this._elementImage = this._element.querySelector(".place__image");
-    this._elementTitle = this._element.querySelector(".place__title");
-    this._placeButtonLike = this._element.querySelector(".place__button-like");
+    this._elementImage = this._element.querySelector('.place__image');
+    this._elementTitle = this._element.querySelector('.place__title');
+    this._placeButtonLike = this._element.querySelector('.place__button-like');
     this._placeButtonRemove = this._element.querySelector(
-      ".place__button-remove",
+      '.place__button-remove'
     );
-    this._placeScoreLike = this._element.querySelector(".place__score-like");
+    this._placeScoreLike = this._element.querySelector('.place__score-like');
 
     this._data.likes.forEach((elem) => {
       if (elem._id === this._userId) {
-        this._placeButtonLike.classList.add("place__button-like_active");
+        this._placeButtonLike.classList.add('place__button-like_active');
       }
     });
 
@@ -64,7 +64,7 @@ export default class Card {
 
     this._elementTitle.textContent = this._name;
     this._elementImage.src = this._link;
-    this._elementImage.alt = "Фотография местности " + this._name;
+    this._elementImage.alt = 'Фотография местности ' + this._name;
     this._placeScoreLike.textContent = this._scoreLike;
 
     return this._element;
@@ -74,7 +74,7 @@ export default class Card {
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
-      .content.querySelector(".place")
+      .content.querySelector('.place')
       .cloneNode(true);
 
     return cardElement;
@@ -82,9 +82,9 @@ export default class Card {
 
   // Метод вешает слушатели событий
   _setEventListeners = () => {
-    this._placeButtonRemove.addEventListener("click", this._removeClickHandler);
-    this._placeButtonLike.addEventListener("click", this._likeClickHandler);
-    this._elementImage.addEventListener("click", () => {
+    this._placeButtonRemove.addEventListener('click', this._removeClickHandler);
+    this._placeButtonLike.addEventListener('click', this._likeClickHandler);
+    this._elementImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
   };

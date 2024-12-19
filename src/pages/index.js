@@ -1,12 +1,12 @@
-import "./index.css";
-import Api from "../components/Api.js";
-import Section from "../components/Section.js";
-import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js";
-import PopupWithRemove from "../components/PopupWithRemove.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo from "../components/UserInfo.js";
+import './index.css';
+import Api from '../components/Api.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithRemove from '../components/PopupWithRemove.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 import {
   validationConfigPopup,
   profileEditButton,
@@ -25,16 +25,16 @@ import {
   popupNameField,
   popupStatusField,
   profileAvatarContainer,
-} from "../utils/constants.js";
+} from '../utils/constants.js';
 
 // Глобальная переменная содержащая в себе Id юзера
 const userId = {};
 
 // Экземпляр класса API
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1",
-  token: "429ceaf1-0a34-48aa-a4c9-c70c2c79ac6e",
-  groupId: "cohort-19",
+  baseUrl: 'https://mesto.nomoreparties.co/v1',
+  token: '429ceaf1-0a34-48aa-a4c9-c70c2c79ac6e',
+  groupId: 'cohort-19',
 });
 
 // Экземпляр формы с картинкой и тектом
@@ -47,7 +47,7 @@ const popupRemoveCard = new PopupWithRemove(
       removeCard(card);
     },
   },
-  popupRemoveCardId,
+  popupRemoveCardId
 );
 
 // Константа содержащая в себе все карточки
@@ -58,7 +58,7 @@ const cardsList = new Section(
       cardsList.setItem(cardElement);
     },
   },
-  placesListSelector,
+  placesListSelector
 );
 
 // Константа содержащая в себе карточку с данными из формы
@@ -76,7 +76,7 @@ const formAddCard = new PopupWithForm(
         .finally(formAddCard.renderLoading(false));
     },
   },
-  popupAddCardId,
+  popupAddCardId
 );
 
 // Экземпляр класса с информацией юзера
@@ -100,7 +100,7 @@ const formProfile = new PopupWithForm(
         .finally(formProfile.renderLoading(false));
     },
   },
-  popupProfileId,
+  popupProfileId
 );
 
 // Экземпляр попапа для смены Аватара
@@ -117,7 +117,7 @@ const formProfileAvatar = new PopupWithForm(
         .finally(formProfile.renderLoading(false));
     },
   },
-  popupEditAvatarId,
+  popupEditAvatarId
 );
 
 // Прием объекта по Апи с свервера и перебор элементов
@@ -180,7 +180,7 @@ function creatureCard(item) {
         popupRemoveCard.open(card);
       },
       likeClickHandler: (evt) => {
-        if (!evt.target.classList.contains("place__button-like_active")) {
+        if (!evt.target.classList.contains('place__button-like_active')) {
           addLike(card);
         } else {
           removeLike(card);
@@ -188,7 +188,7 @@ function creatureCard(item) {
       },
       currentUserId: userId.id,
     },
-    ".places-template",
+    '.places-template'
   );
 
   return card;
@@ -197,15 +197,15 @@ function creatureCard(item) {
 // Создаем экземпляры Валидации для форм
 const editPopupValidator = new FormValidator(
   validationConfigPopup,
-  popupFormEditContainer,
+  popupFormEditContainer
 );
 const addPopupValidator = new FormValidator(
   validationConfigPopup,
-  popupFormAddContainer,
+  popupFormAddContainer
 );
 const addAvatarPopupValidator = new FormValidator(
   validationConfigPopup,
-  popupFormAddAvatarContainer,
+  popupFormAddAvatarContainer
 );
 
 // Запускаем валидацию форм
@@ -221,7 +221,7 @@ formProfileAvatar.setEventListeners();
 popupRemoveCard.setEventListeners();
 
 // Отслеживаем событие клика кнопки "редактировать"
-profileEditButton.addEventListener("click", () => {
+profileEditButton.addEventListener('click', () => {
   const dataUserInfo = userInfo.getUserInfo();
   popupNameField.value = dataUserInfo.name;
   popupStatusField.value = dataUserInfo.about;
@@ -229,11 +229,11 @@ profileEditButton.addEventListener("click", () => {
 });
 
 // Отслеживаем событие клика кнопки "добавить карточку"
-profileAddButton.addEventListener("click", () => {
+profileAddButton.addEventListener('click', () => {
   formAddCard.open();
 });
 
 // Отслеживаем событие клика на аватарку
-profileAvatarContainer.addEventListener("click", () => {
+profileAvatarContainer.addEventListener('click', () => {
   formProfileAvatar.open();
 });
